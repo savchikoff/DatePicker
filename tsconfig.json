@@ -21,6 +21,7 @@
         ".storybook/**/*",
         ".eslintrc.cjs",
         "./rollup.config.js",
+        "./babel.config.js",
         "build",
         "src/**/*.stories.tsx"
     ],
