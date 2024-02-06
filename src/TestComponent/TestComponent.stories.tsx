@@ -2,13 +2,13 @@ import React from 'react';
 import TestComponent from './TestComponent';
 
 export default {
-	title: 'TestComponent',
+  title: 'TestComponent',
 };
 
 export function Primary() {
-  return <TestComponent theme="primary" />
+  return <TestComponent />
 }
 
 export function Secondary() {
-  return <TestComponent theme="secondary" />
+  return <TestComponent />
 }
