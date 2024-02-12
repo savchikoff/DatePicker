@@ -56,7 +56,7 @@ function Calendar({ selectedDate, onSelect }: CalendarProps) {
                     <WeekDay key={day}>{day}</WeekDay>
                 ))}
                 {blanksArray.map((_, index) => (
-                    <div key={index}></div>
+                    <div key={index} />
                 ))}
                 {daysArray.map((day) => (
                     <CalendarDay
