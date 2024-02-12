@@ -35,9 +35,16 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-essentials": "^7.6.12",
+    "@storybook/addon-interactions": "^7.6.12",
+    "@storybook/addon-links": "^7.6.12",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.12",
     "@storybook/cli": "^7.6.12",
     "@storybook/react": "^7.6.12",
     "@storybook/react-webpack5": "^7.6.12",
+    "@storybook/test": "^7.6.12",
+    "@svgr/cli": "^8.1.0",
     "@types/react": "^18.2.53",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -53,6 +60,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "husky": "^9.0.10",
     "lint-staged": "^15.2.2",
     "node-sass": "^9.0.0",
@@ -75,5 +83,9 @@
   "lint-staged": {
     "*.{js, jsx, ts, tsx}": "eslint . --fix",
     "*.--write": "prettier . --write"
+  },
+  "dependencies": {
+    "@mdx-js/esbuild": "^3.0.0",
+    "serve": "^14.2.1"
   }
 }
