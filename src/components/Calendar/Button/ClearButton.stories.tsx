@@ -1,8 +1,8 @@
-import ClearButton from ".";
+import Button from ".";
 
 export default {
-    title: 'Calendar/ClearButton',
-    component: ClearButton,
+    title: 'Calendar/Button',
+    component: Button,
     parameters: {
         layout: 'centered',
     }

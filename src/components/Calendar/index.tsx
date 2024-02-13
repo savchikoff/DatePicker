@@ -9,8 +9,10 @@ import {
 import DateInput from './DateInput';
 
 function CustomDatePicker() {
-    const [selectedDate, setSelectedDate] = useState<Date>();
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [calendarVisible, setCalendarVisible] = useState(false);
+
+    console.log(selectedDate);
 
     const handleDateSelect = (date: Date) => {
         setSelectedDate(date);
@@ -22,16 +24,27 @@ function CustomDatePicker() {
         setSelectedDate(null);
     }
 
+    const minDate = new Date(Date.parse("01 Jan 1970"));
+    const maxDate = new Date(Date.parse("01 Jan 2025"));
+
 
     return (
         <DatePickerContainer>
             <GlobalStyle />
-            <DateInput value={selectedDate}
+            <DateInput
+                maxDate={maxDate}
+                minDate={minDate}
+                value={selectedDate}
                 handleClick={handleCalendarVisibility}
                 handleInputReset={handleInputReset}
                 setSelectedDate={setSelectedDate} />
             <CalendarContainer show={calendarVisible}>
-                <Calendar selectedDate={selectedDate} onSelect={handleDateSelect} />
+                <Calendar
+                    maxDate={maxDate}
+                    minDate={minDate}
+                    selectedDate={selectedDate}
+                    handleCalendarVisibility={handleCalendarVisibility}
+                    onSelect={handleDateSelect} />
             </CalendarContainer>
         </DatePickerContainer>
     );

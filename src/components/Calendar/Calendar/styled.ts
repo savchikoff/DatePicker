@@ -3,19 +3,11 @@ import styled from "styled-components";
 export const CalendarWrapper = styled.div`
     width: 250px;
     box-sizing: border-box;
-    height: 240px;
+    min-height: 240px;
     padding: 10px;
     border: 1px solid #E1E1E1;
     border-radius: 8px;
 `
-
-export const CalendarHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  font-size: 14px;
-  font-weight: 700;
-`;
 
 export const CalendarDays = styled.div`
   display: grid;
@@ -29,7 +21,7 @@ export const WeekDay = styled.div`
     padding: 8px 0;
 `
 
-export const CalendarDay = styled.div<{ isSelected: boolean }>`
+export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolean, isPreviousMonth: boolean, isWeekend: boolean }>`
   text-align: center;
   cursor: pointer;
   font-size: 13px;
@@ -37,5 +29,5 @@ export const CalendarDay = styled.div<{ isSelected: boolean }>`
   border-radius: 4px;
   padding: 8px;
   background-color: ${(props) => (props.isSelected ? '#007bff' : 'transparent')};
-  color: ${(props) => (props.isSelected ? '#fff' : 'inherit')};
+  color: ${(props) => (props.isSelected ? '#fff' : props.isNextMonth || props.isPreviousMonth ? "#AAAAAA" : props.isWeekend ? "#FD1E1E" : "inherit")};
 `;
