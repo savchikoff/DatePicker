@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Calendar from './Calendar';
 import GlobalStyle from '../../GlobalStyles/styled';
 import {
@@ -12,17 +12,19 @@ function CustomDatePicker() {
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [calendarVisible, setCalendarVisible] = useState(false);
 
-    console.log(selectedDate);
+    console.log(calendarVisible);
 
-    const handleDateSelect = (date: Date) => {
+    const handleDateSelect = useCallback((date: Date) => {
         setSelectedDate(date);
-    };
+    }, []);
 
-    const handleCalendarVisibility = () => setCalendarVisible(prevState => !prevState);
+    const handleCalendarVisibility = useCallback(() => {
+        setCalendarVisible(prevState => !prevState);
+    }, []);
 
-    const handleInputReset = () => {
+    const handleInputReset = useCallback(() => {
         setSelectedDate(null);
-    }
+    }, []);
 
     const minDate = new Date(Date.parse("01 Jan 1970"));
     const maxDate = new Date(Date.parse("01 Jan 2025"));
@@ -43,7 +45,7 @@ function CustomDatePicker() {
                     maxDate={maxDate}
                     minDate={minDate}
                     selectedDate={selectedDate}
-                    handleCalendarVisibility={handleCalendarVisibility}
+                    setCalendarVisible={setCalendarVisible}
                     onSelect={handleDateSelect} />
             </CalendarContainer>
         </DatePickerContainer>

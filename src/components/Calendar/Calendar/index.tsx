@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import MonthSlider from '../MonthSlider';
 import useClickOutside from '../../../hooks/useClickOutside';
 import {
@@ -15,7 +15,7 @@ interface CalendarProps {
     onSelect: (date: Date) => void;
     firstDayOfWeek?: 'Sunday' | 'Monday';
     isWeekDayHighlighted?: boolean;
-    handleCalendarVisibility: () => void;
+    setCalendarVisible: (state: boolean) => void;
 }
 
 const WEEK_DAYS = {
@@ -23,8 +23,13 @@ const WEEK_DAYS = {
     'Monday': ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
 };
 
-function Calendar({ maxDate, minDate, selectedDate, onSelect, firstDayOfWeek = 'Sunday', isWeekDayHighlighted = true, handleCalendarVisibility }: CalendarProps) {
+function Calendar({ maxDate, minDate, selectedDate, onSelect, firstDayOfWeek = 'Sunday', isWeekDayHighlighted = true, setCalendarVisible }: CalendarProps) {
     const calendarRef = useRef();
+
+    const handleCalendarVisibility = () => {
+        setCalendarVisible(false);
+    }
+
     useClickOutside(calendarRef, handleCalendarVisibility);
 
     const currentDate = selectedDate || new Date();
@@ -54,7 +59,7 @@ function Calendar({ maxDate, minDate, selectedDate, onSelect, firstDayOfWeek = '
 
     const isWeekend = (day: number) => {
         const weekDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-        return weekDay === 0 || weekDay === 6; // Sunday or Saturday
+        return weekDay === 0 || weekDay === 6;
     };
 
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
@@ -150,4 +155,4 @@ function Calendar({ maxDate, minDate, selectedDate, onSelect, firstDayOfWeek = '
     );
 }
 
-export default Calendar;
+export default memo(Calendar);

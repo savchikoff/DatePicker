@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { DateSelectorInput, DateSelectorContainer, DateSelectorInputWrapper } from './styled';
 import CalendarIcon from '../../Icons/CalendarIcon';
 import ClearIcon from '../../Icons/ClearIcon';
@@ -65,4 +65,4 @@ function DateInput({ maxDate, minDate, value, handleClick, handleInputReset, set
     )
 }
 
-export default DateInput; 
+export default memo(DateInput); 
