@@ -1,6 +1,10 @@
 import React, { ComponentType, FC } from "react";
 
-const withWeekends = <P extends object>(WrappedComponent): FC<P> => {
+interface WithWeekendsProps {
+    isWeekDaysHighlighted: boolean;
+}
+
+const withWeekends = <P extends object>(WrappedComponent: ComponentType<P & WithWeekendsProps>): FC<P> => {
     const ComponentWithWeekends = (props: P) => {
         return <WrappedComponent {...props} isWeekDaysHighlighted />
     }

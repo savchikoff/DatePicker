@@ -1,11 +1,11 @@
-import CustomDatePicker from ".";
+import Calendar from ".";
 
 export default {
-    title: 'Calendar/CustomDatePicker',
-    component: CustomDatePicker,
+    title: 'Calendar/Calendar',
+    component: Calendar,
     parameters: {
         layout: 'centered',
     }
 };
 
-export const BasicInput = {};
+export const BasicCalendar = {};

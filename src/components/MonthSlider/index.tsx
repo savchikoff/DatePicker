@@ -1,15 +1,15 @@
 import React from 'react';
 import { SliderWrapper } from './styled';
-import NextIcon from '../../Icons/NextIcon';
-import PreviousIcon from '../../Icons/PreviousIcon';
+import NextIcon from '../Icons/NextIcon';
+import PreviousIcon from '../Icons/PreviousIcon';
 
-interface MonthSlider {
+interface MonthSliderProps {
     handlePreviousMonthOpen: () => void;
     handleNextMonthOpen: () => void;
     currentDate: Date;
 }
 
-function MonthSlider({ handlePreviousMonthOpen, handleNextMonthOpen, currentDate }) {
+function MonthSlider({ handlePreviousMonthOpen, handleNextMonthOpen, currentDate }: MonthSliderProps) {
     return (
         <SliderWrapper>
             <PreviousIcon onClick={handlePreviousMonthOpen} />

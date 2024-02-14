@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const DateContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+`
+
 export const DateSelectorContainer = styled.div`
     display: flex;
     align-items: center;
@@ -9,6 +15,12 @@ export const DateSelectorContainer = styled.div`
     box-sizing: border-box;
     border-radius: 8px;
     border: 1px solid #AAAAAA;
+`
+
+export const DateSelectorLabel = styled.label`
+    font-family: inherit;
+    font-size: 15;
+    font-weight: 600;
 `
 
 export const DateSelectorInputWrapper = styled.div`

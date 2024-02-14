@@ -37,6 +37,7 @@ module.exports = {
         "import/prefer-default-export": "off",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off",
-        "react/no-array-index-key": "off"
+        "react/no-array-index-key": "off",
+        "no-nested-ternary": "off"
     }
 }
