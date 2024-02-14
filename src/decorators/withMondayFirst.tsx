@@ -5,7 +5,7 @@ interface WithMondayFirstProps {
 }
 
 const withMondayFirst = <P extends object>(WrappedComponent: ComponentType<P & WithMondayFirstProps>): FC<P> => {
-    const ComponentWithWeekends = (props: P) => {
+    function ComponentWithWeekends(props: P) {
         return <WrappedComponent {...props} isMondayFirst />
     }
 

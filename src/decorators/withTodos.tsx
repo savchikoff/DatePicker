@@ -7,7 +7,7 @@ interface WithTodosProps {
 
 const withTodos = <P extends object>(WrappedComponent: ComponentType<P & WithTodosProps>): FC<P> => {
     const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
-    const ComponentWithWeekends = (props: P) => {
+    function ComponentWithWeekends(props: P) {
         return (
             <>
                 <WrappedComponent {...props} isWithTodos />
