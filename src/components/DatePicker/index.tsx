@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import Calendar from '../Calendar';
+import { useCalendar } from '../../providers/CalendarProvider';
+import { useDate } from '../../providers/DateProvider';
 import GlobalStyle from '../../GlobalStyles/styled';
-import withWeekends from '../../decorators/withWeekends';
-import withMondayFirst from '../../decorators/withMondayFirst';
-import withTodos from '../../decorators/withTodos';
 import {
     DatePickerContainer,
     CalendarContainer,
@@ -12,7 +11,9 @@ import {
 import DateInput from '../DateInput';
 
 function CustomDatePicker() {
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const { selectedDate, setSelectedDate } = useCalendar();
+    const { setRange } = useDate();
+    // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [calendarVisible, setCalendarVisible] = useState(false);
 
     const handleDateSelect = useCallback((date: Date) => {
@@ -30,11 +31,6 @@ function CustomDatePicker() {
     const minDate = new Date(Date.parse("01 Jan 1970"));
     const maxDate = new Date(Date.parse("01 Jan 2025"));
 
-    const CalendarWithWeekends = withWeekends(Calendar);
-    const CalendarWithMondayFirst = withMondayFirst(CalendarWithWeekends);
-    const CalendarWithTodos = withTodos(CalendarWithMondayFirst);
-
-
     return (
         <DatePickerContainer>
             <GlobalStyle />
@@ -46,7 +42,7 @@ function CustomDatePicker() {
                 handleInputReset={handleInputReset}
                 setSelectedDate={setSelectedDate} />
             <CalendarContainer show={calendarVisible}>
-                <CalendarWithTodos
+                <Calendar
                     maxDate={maxDate}
                     minDate={minDate}
                     selectedDate={selectedDate}

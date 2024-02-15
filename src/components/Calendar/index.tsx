@@ -10,14 +10,7 @@ import {
 import { CalendarProps } from './interfaces';
 import { WEEK_DAYS } from '../../constants/weekDays';
 
-function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMondayFirst, isWeekDaysHighlighted, setCalendarVisible }: CalendarProps) {
-    const calendarRef = useRef();
-
-    const handleCalendarVisibility = () => {
-        setCalendarVisible(false);
-    }
-
-    useClickOutside(calendarRef, handleCalendarVisibility);
+function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMondayFirst, isWeekDaysHighlighted }: CalendarProps) {
 
     const currentDate = selectedDate || new Date();
     const daysInMonth = new Date(
@@ -82,7 +75,7 @@ function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMon
     };
 
     return (
-        <CalendarWrapper ref={calendarRef} isWithTodos={isWithTodos}>
+        <CalendarWrapper isWithTodos={isWithTodos}>
             <MonthSlider handleNextMonthOpen={handleNextMonthOpen} handlePreviousMonthOpen={handlePreviousMonthOpen} currentDate={currentDate} />
             <CalendarDays>
                 {WEEK_DAYS[isMondayFirst ? 'Monday' : 'Sunday'].map((day) => (

@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import terser from '@rollup/plugin-terser';
+import alias from '@rollup/plugin-alias';
 import { babel } from '@rollup/plugin-babel';
 import packageJson from './package.json';
 
@@ -21,6 +22,12 @@ export default {
 		},
 	],
 	plugins: [
+		alias({
+			entries: [
+				{ find: 'utils', replacement: './src/utils' },
+				{ find: 'decorators', replacement: './src/decorators' }
+			]
+		}),
 		peerDepsExternal(),
 		babel({ babelHelpers: 'bundled' }),
 		resolve(),
