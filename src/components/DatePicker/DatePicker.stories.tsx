@@ -1,8 +1,8 @@
-import CustomDatePicker from ".";
+import DatePicker from ".";
 
 export default {
-    title: 'Calendar/CustomDatePicker',
-    component: CustomDatePicker,
+    title: 'Calendar/DatePicker',
+    component: DatePicker,
 };
 
 export const BasicInput = {};

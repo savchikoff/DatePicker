@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import TodoList from './TodoList';
 import { ModalProps } from './types';
 import { Overlay, ModalContainer, ModalHeader, CloseButton } from './styled';
+import { useCalendar } from '../../providers/CalendarProvider';
 import useClickOutside from '../../hooks/useClickOutside';
 
 function Modal({ isOpen, onClose }: ModalProps) {
@@ -12,13 +13,15 @@ function Modal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef();
   useClickOutside(modalRef, onClose);
 
+  const { selectedDate } = useCalendar();
+
   return (
     <Overlay>
       <ModalContainer ref={modalRef}>
         <ModalHeader>
           <CloseButton onClick={onClose}>❌</CloseButton>
         </ModalHeader>
-        <TodoList />
+        <TodoList selectedDate={selectedDate} />
       </ModalContainer>
     </Overlay>
   );

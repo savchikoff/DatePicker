@@ -1,6 +1,7 @@
 import React, { useRef, memo } from 'react';
 import MonthSlider from '../MonthSlider';
-import useClickOutside from '../../hooks/useClickOutside';
+import { useCalendar } from '../../providers/CalendarProvider';
+import { useDate } from '../../providers/DateProvider';
 import {
     CalendarWrapper,
     WeekDay,
@@ -10,7 +11,9 @@ import {
 import { CalendarProps } from './interfaces';
 import { WEEK_DAYS } from '../../constants/weekDays';
 
-function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMondayFirst, isWeekDaysHighlighted }: CalendarProps) {
+function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: CalendarProps) {
+    const { selectedDate, setSelectedDate } = useCalendar();
+    const { minDate, maxDate } = useDate();
 
     const currentDate = selectedDate || new Date();
     const daysInMonth = new Date(
@@ -43,6 +46,7 @@ function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMon
     };
 
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
+        console.log("FIRE");
         const clickedMonth = isPreviousMonth
             ? currentDate.getMonth() - 1
             : isNextMonth
@@ -51,8 +55,12 @@ function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMon
 
         const newDate = new Date(currentDate.getFullYear(), clickedMonth, day);
 
-        if (newDate >= minDate && newDate <= maxDate) {
-            onSelect(newDate);
+        if (minDate && maxDate) {
+            if (newDate >= minDate && newDate <= maxDate) {
+                setSelectedDate(newDate);
+            }
+        } else {
+            setSelectedDate(newDate);
         }
     };
 
@@ -60,8 +68,12 @@ function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMon
         const newMonth = new Date(currentDate);
         newMonth.setMonth(currentDate.getMonth() - 1);
 
-        if (newMonth >= minDate) {
-            onSelect(newMonth);
+        if (minDate) {
+            if (newMonth >= minDate) {
+                setSelectedDate(newMonth);
+            }
+        } else {
+            setSelectedDate(newMonth);
         }
     };
 
@@ -69,8 +81,12 @@ function Calendar({ maxDate, minDate, selectedDate, isWithTodos, onSelect, isMon
         const newMonth = new Date(currentDate);
         newMonth.setMonth(currentDate.getMonth() + 1);
 
-        if (newMonth <= maxDate) {
-            onSelect(newMonth);
+        if (maxDate) {
+            if (newMonth <= maxDate) {
+                setSelectedDate(newMonth);
+            }
+        } else {
+            setSelectedDate(newMonth);
         }
     };
 

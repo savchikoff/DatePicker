@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText } from './styled';
+import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText, DeleteButton } from './styled';
+import { TodoListProps } from './types';
 
-function TodoList() {
+function TodoList({ selectedDate }: TodoListProps) {
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState('');
 
@@ -28,7 +29,7 @@ function TodoList() {
 
     return (
         <TodosContainer>
-            <TodosHeader>Todo List for the day</TodosHeader>
+            <TodosHeader>Todo List for {selectedDate.toLocaleDateString()}</TodosHeader>
             <TodoAddField>
                 <TodoInput
                     type="text"
@@ -48,7 +49,7 @@ function TodoList() {
                         <TodoText isCompleted={todo.completed}>
                             {todo.text}
                         </TodoText>
-                        <button onClick={() => deleteTodo(index)} type="button">Delete</button>
+                        <DeleteButton onClick={() => deleteTodo(index)} type="button">Delete</DeleteButton>
                     </TodoItem>
                 ))}
             </ListOfTodos>

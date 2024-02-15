@@ -1,14 +1,19 @@
 import React, { useEffect, useState, memo } from 'react';
 import GlobalStyle from '../../GlobalStyles/styled';
 import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
-import { DateInputProps } from './interfaces';
+import { useCalendar } from '../../providers/CalendarProvider';
+import { useDate } from '../../providers/DateProvider';
+import { DateInputProps } from './types';
 import { isValidDate } from '../../helpers/isValidDate';
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
 
-function DateInput({ maxDate, minDate, value, handleCalendarClick, handleInputReset, setSelectedDate, label = "Date" }: DateInputProps) {
+function DateInput({ handleCalendarClick, label = "Date" }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");
     const [isInputValid, setIsInputValid] = useState(true);
+
+    const { minDate, maxDate } = useDate();
+    const { selectedDate: value, setSelectedDate } = useCalendar();
 
     useEffect(() => {
         setEnteredDate(value?.toLocaleDateString());
@@ -32,11 +37,10 @@ function DateInput({ maxDate, minDate, value, handleCalendarClick, handleInputRe
         }
     }
 
-
-    const handleInputClear = () => {
+    const handleInputReset = () => {
+        setSelectedDate(null);
         setEnteredDate("");
-        handleInputReset();
-    }
+    };
 
     return (
         <>
@@ -48,7 +52,7 @@ function DateInput({ maxDate, minDate, value, handleCalendarClick, handleInputRe
                         <CalendarIcon onClick={handleCalendarClick} />
                         <DateSelectorInput placeholder='Choose date' value={enteredDate} onChange={handleInputChange} maxLength={10} isValid={isInputValid} />
                     </DateSelectorInputWrapper>
-                    {enteredDate && <ClearIcon onClick={handleInputClear} />}
+                    {enteredDate && <ClearIcon onClick={handleInputReset} />}
                 </DateSelectorContainer >
             </DateContainer>
         </>
