@@ -5,14 +5,14 @@ interface WithMondayFirstProps {
 }
 
 const withMondayFirst = <P extends object>(WrappedComponent: ComponentType<P & WithMondayFirstProps>): FC<P> => {
-    function ComponentWithWeekends(props: P) {
+    function ComponentWithMondayFirst(props: P) {
         return <WrappedComponent {...props} isMondayFirst />
     }
 
     const displayName = WrappedComponent.displayName || WrappedComponent.name;
-    ComponentWithWeekends.displayName = `withMondayFirst(${displayName})`;
+    ComponentWithMondayFirst.displayName = `withMondayFirst(${displayName})`;
 
-    return ComponentWithWeekends;
+    return ComponentWithMondayFirst;
 };
 
 export default withMondayFirst;

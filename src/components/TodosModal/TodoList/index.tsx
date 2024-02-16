@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText, DeleteButton } from './styled';
 import { TodoListProps } from './types';
+import { readFromCache, writeToCache } from '../../../helpers/cache';
 
 function TodoList({ selectedDate }: TodoListProps) {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(() => {
+        return readFromCache(selectedDate?.toLocaleDateString());
+    });
     const [newTodo, setNewTodo] = useState('');
+
+    useEffect(() => {
+        writeToCache(selectedDate?.toLocaleDateString(), todos);
+    }, [todos]);
 
     const handleNewTodoInputChange = (e) => setNewTodo(e.target.value);
 
@@ -29,7 +36,7 @@ function TodoList({ selectedDate }: TodoListProps) {
 
     return (
         <TodosContainer>
-            <TodosHeader>Todo List for {selectedDate.toLocaleDateString()}</TodosHeader>
+            <TodosHeader>Todo List for {selectedDate?.toLocaleDateString()}</TodosHeader>
             <TodoAddField>
                 <TodoInput
                     type="text"

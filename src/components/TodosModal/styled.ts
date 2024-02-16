@@ -12,6 +12,10 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
+export const Error = styled.h2`
+  color: #FD1E1E;
+`
+
 export const ModalHeader = styled.div`
   display: flex;
   justify-content: flex-end;

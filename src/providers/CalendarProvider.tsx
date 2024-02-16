@@ -20,7 +20,6 @@ export const useCalendar = () => useContext(CalendarContext)
 
 function CalendarProvider({ children }: CalendarProviderProps) {
     const [selectedDate, setSelectedDate] = useState<Date>(date);
-    console.log(selectedDate);
 
     const values: ICalendarContext = useMemo(() => ({
         selectedDate,

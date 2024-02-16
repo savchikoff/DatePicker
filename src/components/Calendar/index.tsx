@@ -10,8 +10,9 @@ import {
 } from './styled';
 import { CalendarProps } from './interfaces';
 import { WEEK_DAYS } from '../../constants/weekDays';
+import { HOLIDAYS } from '../../constants/holidays';
 
-function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: CalendarProps) {
+function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
     const { selectedDate, setSelectedDate } = useCalendar();
     const { minDate, maxDate } = useDate();
 
@@ -45,6 +46,17 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
         return weekDay === 0 || weekDay === 6;
     };
 
+    const isHoliday = (day: number, month: number, year: number): boolean => {
+        return HOLIDAYS.some(holiday => {
+            const { date: holidayDate } = holiday;
+            return (
+                holidayDate.getFullYear() === year &&
+                holidayDate.getMonth() === month &&
+                holidayDate.getDate() === day
+            );
+        });
+    };
+
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
         console.log("FIRE");
         const clickedMonth = isPreviousMonth
@@ -56,7 +68,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
         const newDate = new Date(currentDate.getFullYear(), clickedMonth, day);
 
         if (minDate && maxDate) {
-            if (newDate >= minDate && newDate <= maxDate) {
+            if (newDate > minDate && newDate < maxDate) {
                 setSelectedDate(newDate);
             }
         } else {
@@ -69,7 +81,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
         newMonth.setMonth(currentDate.getMonth() - 1);
 
         if (minDate) {
-            if (newMonth >= minDate) {
+            if (newMonth > minDate) {
                 setSelectedDate(newMonth);
             }
         } else {
@@ -82,7 +94,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
         newMonth.setMonth(currentDate.getMonth() + 1);
 
         if (maxDate) {
-            if (newMonth <= maxDate) {
+            if (newMonth < maxDate) {
                 setSelectedDate(newMonth);
             }
         } else {
@@ -109,6 +121,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
                         isPreviousMonth
                         isNextMonth={false}
                         isWeekend={isWeekDaysHighlighted && isWeekend(day)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear())}
                     >
                         {day}
                     </CalendarDay>
@@ -126,6 +139,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
                         isPreviousMonth={false}
                         isNextMonth={false}
                         isWeekend={isWeekDaysHighlighted && isWeekend(day)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear())}
                     >
                         {day}
                     </CalendarDay>
@@ -142,6 +156,7 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted }: Calenda
                         isNextMonth
                         isPreviousMonth={false}
                         isWeekend={isWeekDaysHighlighted && isWeekend(day)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear())}
                     >
                         {day}
                     </CalendarDay>

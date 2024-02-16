@@ -21,7 +21,7 @@ export const WeekDay = styled.div`
     padding: 8px 0;
 `
 
-export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolean, isPreviousMonth: boolean, isWeekend: boolean }>`
+export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolean, isPreviousMonth: boolean, isWeekend: boolean, isHoliday: boolean }>`
   text-align: center;
   cursor: pointer;
   font-size: 13px;
@@ -29,5 +29,5 @@ export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolea
   border-radius: 4px;
   padding: 8px;
   background-color: ${(props) => (props.isSelected ? '#007bff' : 'transparent')};
-  color: ${(props) => (props.isSelected ? '#fff' : props.isNextMonth || props.isPreviousMonth ? "#AAAAAA" : props.isWeekend ? "#FD1E1E" : "inherit")};
+  color: ${(props) => (props.isSelected ? '#fff' : props.isNextMonth || props.isPreviousMonth ? "#AAAAAA" : props.isWeekend || props.isHoliday ? "#FD1E1E" : "inherit")};
 `;
