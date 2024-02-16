@@ -28,16 +28,19 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHoliday
         1
     ).getDay();
 
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
-    const daysFromPrevMonth = Array.from({ length: firstDayOfMonth }, (_, i) => {
-        const prevMonthDays = new Date(
+    const daysFromPrevMonth = Array.from({ length: firstDayOfMonth === 0 && isMondayFirst ? 6 : firstDayOfMonth - (isMondayFirst ? 1 : 0) }, (_, i) => {
+        const prevMonthLastDay = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             0
         ).getDate();
-        return prevMonthDays - i;
-    }).reverse();
+
+        const day = isMondayFirst ? prevMonthLastDay - firstDayOfMonth + i + 2 : prevMonthLastDay - firstDayOfMonth + i + 1;
+
+        return day > prevMonthLastDay ? day - prevMonthLastDay : day;
+    });
+
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
     const daysFromNextMonth = Array.from({ length: 7 - ((daysArray.length + daysFromPrevMonth.length) % 7) }, (_, i) => i + 1);
 
@@ -58,7 +61,6 @@ function Calendar({ isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHoliday
     };
 
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
-        console.log("FIRE");
         const clickedMonth = isPreviousMonth
             ? currentDate.getMonth() - 1
             : isNextMonth

@@ -30,4 +30,8 @@ export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolea
   padding: 8px;
   background-color: ${(props) => (props.isSelected ? '#007bff' : 'transparent')};
   color: ${(props) => (props.isSelected ? '#fff' : props.isNextMonth || props.isPreviousMonth ? "#AAAAAA" : props.isWeekend || props.isHoliday ? "#FD1E1E" : "inherit")};
+  transition: background-color 0.3s ease;
+  &:hover{
+    background-color: #F1F1F1;
+  }
 `;

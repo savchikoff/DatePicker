@@ -3,6 +3,7 @@ import Calendar from '../Calendar';
 import withTodos from '../../decorators/withTodos';
 import withWeekends from '../../decorators/withWeekends';
 import withHolidays from '../../decorators/withHolidays';
+import withMondayFirst from '../../decorators/withMondayFirst';
 import { DateContext } from '../../providers/DateProvider';
 import { DatePickerProps } from './types';
 import CalendarProvider from '../../providers/CalendarProvider';
@@ -20,9 +21,7 @@ function DatePicker({ minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0
     const [calendarVisible, setCalendarVisible] = useState(false);
     const minMaxLimits = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
 
-    const CalendarWithTodos = withTodos(Calendar);
-    const CalendarWithWeekends = withWeekends(CalendarWithTodos);
-    const CalendarWithHolidays = withHolidays(CalendarWithWeekends);
+    // const CalendarWithMondayFirst = withMondayFirst(Calendar);
 
     const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible(prevState => !prevState);
@@ -36,7 +35,7 @@ function DatePicker({ minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0
                     <DateInput
                         handleCalendarClick={handleCalendarVisibility} />
                     <CalendarContainer show={calendarVisible}>
-                        <CalendarWithHolidays
+                        <Calendar
                             setCalendarVisible={setCalendarVisible} />
                     </CalendarContainer>
                 </DatePickerContainer>
