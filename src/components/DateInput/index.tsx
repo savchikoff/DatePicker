@@ -3,12 +3,12 @@ import GlobalStyle from '../../GlobalStyles/styled';
 import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
 import { useCalendar } from '../../providers/CalendarProvider';
 import { useDate } from '../../providers/DateProvider';
-import { DateInputProps } from './types';
+import { DateInputProps } from './interfaces';
 import { isValidDate } from '../../helpers/isValidDate';
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
 
-function DateInput({ handleCalendarClick, label = "Date" }: DateInputProps) {
+function DateInput({ handleCalendarClick, label = "Date", selectedDate }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");
     const [isInputValid, setIsInputValid] = useState(true);
 
@@ -50,7 +50,7 @@ function DateInput({ handleCalendarClick, label = "Date" }: DateInputProps) {
                 <DateSelectorContainer>
                     <DateSelectorInputWrapper>
                         <CalendarIcon onClick={handleCalendarClick} />
-                        <DateSelectorInput placeholder='Choose date' value={enteredDate} onChange={handleInputChange} maxLength={10} isValid={isInputValid} />
+                        <DateSelectorInput placeholder='DD.MM.YYYY' value={enteredDate} onChange={handleInputChange} maxLength={10} isValid={isInputValid} />
                     </DateSelectorInputWrapper>
                     {enteredDate && <ClearIcon onClick={handleInputReset} />}
                 </DateSelectorContainer >

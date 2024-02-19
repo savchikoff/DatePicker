@@ -11,9 +11,9 @@ import {
 import DateInput from '../DateInput';
 
 function DatePickerWithRange() {
+    const [calendarVisible, setCalendarVisible] = useState(false);
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
-    const [calendarVisible, setCalendarVisible] = useState(false);
 
     const handleStartDateSelect = useCallback((date: Date) => {
         setStartDate(date);
@@ -33,39 +33,22 @@ function DatePickerWithRange() {
         setStartDate(null);
     }, []);
 
-    const minDate = new Date(Date.parse("01 Jan 1970"));
-    const maxDate = new Date(Date.parse("01 Jan 2025"));
-
-    const CalendarWithWeekends = withWeekends(Calendar);
-
-
     return (
         <DatePickerContainer>
             <GlobalStyle />
             <RangeInputsWrapper>
-                < DateInput
-                    maxDate={maxDate}
-                    minDate={minDate}
-                    value={startDate}
+                <DateInput
                     handleCalendarClick={handleCalendarVisibility}
                     handleInputReset={handleStartDateInputReset}
-                    setSelectedDate={setStartDate}
                     label="From" />
-                < DateInput
-                    maxDate={maxDate}
-                    minDate={minDate}
-                    value={endDate}
+                <DateInput
                     handleInputReset={handleEndDateInputReset}
-                    setSelectedDate={setEndDate}
+                    handleCalendarClick={handleCalendarVisibility}
                     label="To" />
             </RangeInputsWrapper>
             <CalendarContainer show={calendarVisible}>
-                {/* <CalendarWithWeekends
-                    maxDate={maxDate}
-                    minDate={minDate}
-                    selectedDate={selectedDate}
-                    setCalendarVisible={setCalendarVisible}
-                    onSelect={handleDateSelect} /> */}
+                <Calendar
+                    setCalendarVisible={setCalendarVisible} />
             </CalendarContainer>
         </DatePickerContainer>
     );
