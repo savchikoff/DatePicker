@@ -21,7 +21,8 @@ function DatePicker({ minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0
     const [calendarVisible, setCalendarVisible] = useState(false);
     const minMaxLimits = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
 
-    // const CalendarWithMondayFirst = withMondayFirst(Calendar);
+    const CalendarWithMondayFirst = withMondayFirst(Calendar);
+    const CalendarWithWeekends = withWeekends(CalendarWithMondayFirst);
 
     const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible(prevState => !prevState);
@@ -35,7 +36,7 @@ function DatePicker({ minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0
                     <DateInput
                         handleCalendarClick={handleCalendarVisibility} />
                     <CalendarContainer show={calendarVisible}>
-                        <Calendar
+                        <CalendarWithWeekends
                             setCalendarVisible={setCalendarVisible} />
                     </CalendarContainer>
                 </DatePickerContainer>

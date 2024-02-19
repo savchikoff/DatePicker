@@ -14,7 +14,7 @@ function MonthSlider({ handlePreviousMonthOpen, handleNextMonthOpen, currentDate
         <SliderWrapper>
             <PreviousIcon onClick={handlePreviousMonthOpen} />
             <div>
-                {currentDate.toLocaleString('default', { month: 'long' })}, {currentDate.getFullYear()}
+                {currentDate.toLocaleString('en-US', { month: 'long' })} {currentDate.getFullYear()}
             </div>
             <NextIcon onClick={handleNextMonthOpen} />
         </SliderWrapper>
