@@ -1,14 +1,14 @@
 import React, { useEffect, useState, memo } from 'react';
-import GlobalStyle from '../../GlobalStyles/styled';
+import GlobalStyle from '@/GlobalStyles/styled';
 import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
-import { useCalendar } from '../../providers/CalendarProvider';
-import { useDate } from '../../providers/DateProvider';
+import { useCalendar } from '@/providers/CalendarProvider';
+import { useDate } from '@/providers/DateProvider';
 import { DateInputProps } from './interfaces';
-import { isValidDate } from '../../helpers/isValidDate';
+import { isValidDate } from '@/helpers/isValidDate';
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
 
-function DateInput({ handleCalendarClick, label = "Date", selectedDate }: DateInputProps) {
+function DateInput({ handleCalendarClick, label = "Date" }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");
     const [isInputValid, setIsInputValid] = useState(true);
 
@@ -17,6 +17,7 @@ function DateInput({ handleCalendarClick, label = "Date", selectedDate }: DateIn
 
     useEffect(() => {
         setEnteredDate(value?.toLocaleDateString());
+        setIsInputValid(true);
     }, [value]);
 
     const handleInputChange = (e) => {
@@ -31,7 +32,6 @@ function DateInput({ handleCalendarClick, label = "Date", selectedDate }: DateIn
             const year = parseInt(dateParts[2], 10);
             if (isValidDate(year, month, day, minDate, maxDate)) {
                 const dateObject = new Date(year, month, day);
-                setIsInputValid(prevState => !prevState);
                 setSelectedDate(dateObject);
             }
         }

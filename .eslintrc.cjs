@@ -38,6 +38,20 @@ module.exports = {
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "react/no-array-index-key": "off",
-        "no-nested-ternary": "off"
+        "no-nested-ternary": "off",
+        "no-param-reassign": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "": "never",
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ]
+
     }
 }

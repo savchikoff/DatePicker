@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import TodoList from './TodoList';
 import { ModalProps } from './types';
 import { Overlay, ModalContainer, ModalHeader, CloseButton, Error } from './styled';
-import { useCalendar } from '../../providers/CalendarProvider';
-import useClickOutside from '../../hooks/useClickOutside';
+import { useCalendar } from '@/providers/CalendarProvider';
+import useClickOutside from '@/hooks/useClickOutside';
 
 function Modal({ isOpen, onClose }: ModalProps) {
   if (!isOpen) {

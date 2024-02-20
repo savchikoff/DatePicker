@@ -14,13 +14,6 @@ export const CalendarDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
 `;
 
-export const WeekDay = styled.div`
-    font-size: 14px;
-    text-align: center;
-    font-weight: 700;
-    padding: 8px 0;
-`
-
 export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolean, isPreviousMonth: boolean, isWeekend: boolean, isHoliday: boolean }>`
   text-align: center;
   cursor: pointer;

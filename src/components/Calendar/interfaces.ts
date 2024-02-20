@@ -4,4 +4,5 @@ export interface CalendarProps {
     isWithTodos?: boolean;
     isHolidaysHighlighted?: boolean;
     setCalendarVisible: (state: boolean) => void;
+    isByWeeks?: boolean;
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode, FC, useMemo } from "react";
+import React, { createContext, useState, useContext, ReactNode, useMemo } from "react";
 
 interface ICalendarContext {
     selectedDate?: Date;
@@ -9,17 +9,16 @@ interface CalendarProviderProps {
     children: ReactNode;
 }
 
-const date = new Date();
 
 export const CalendarContext = createContext<ICalendarContext>({
     selectedDate: undefined,
     setSelectedDate: () => undefined,
 });
 
-export const useCalendar = () => useContext(CalendarContext)
+export const useCalendar = () => useContext(CalendarContext);
 
 function CalendarProvider({ children }: CalendarProviderProps) {
-    const [selectedDate, setSelectedDate] = useState<Date>(date);
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
     const values: ICalendarContext = useMemo(() => ({
         selectedDate,

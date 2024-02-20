@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import path from 'node:path';
+import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin" // eslint-disable-line import/no-extraneous-dependencies
 
 const config: StorybookConfig = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -20,23 +20,16 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag',
 	},
-	// webpackFinal: async (config) => {
-	// 	config.resolve = {
-	// 		...config.resolve,
-	// 		alias: {
-	// 			...config?.resolve?.alias,
-	// 			"@assets": path.resolve(__dirname, "../src/assets"),
-	// 			"@components": path.resolve(__dirname, "../src/components"),
-	// 			"@constants": path.resolve(__dirname, "../src/constants"),
-	// 			"@decorators": path.resolve(__dirname, "../src/decorators"),
-	// 			"@GlobalStyles": path.resolve(__dirname, "../src/GlobalStyles"),
-	// 			"@helpers": path.resolve(__dirname, "../src/helpers"),
-	// 			"@hooks": path.resolve(__dirname, "../src/hooks"),
-	// 			"@providers": path.resolve(__dirname, "../src/providers")
-	// 		},
-	// 	};
-
-	// 	return config;
-	// },
+	webpackFinal: async (config) => {
+		if (config.resolve) {
+			config.resolve.plugins = [
+				...(config.resolve.plugins || []),
+				new TsconfigPathsPlugin({
+					extensions: config.resolve.extensions,
+				}),
+			]
+		}
+		return config
+	},
 };
 export default config;

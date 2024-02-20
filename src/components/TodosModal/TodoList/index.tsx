@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText, DeleteButton } from './styled';
 import { TodoListProps } from './types';
-import { readFromCache, writeToCache } from '../../../helpers/cache';
+import { readFromCache, writeToCache } from '@/helpers/cache';
 
 function TodoList({ selectedDate }: TodoListProps) {
     const [todos, setTodos] = useState(() => {

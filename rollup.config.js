@@ -24,9 +24,11 @@ export default {
 	plugins: [
 		alias({
 			entries: [
-				{ find: 'utils', replacement: './src/utils' },
-				{ find: 'decorators', replacement: './src/decorators' }
-			]
+				{
+					find: "@/",
+					replacement: "./src/",
+				},
+			],
 		}),
 		peerDepsExternal(),
 		babel({ babelHelpers: 'bundled' }),
