@@ -4,9 +4,7 @@ import { TodoListProps } from './types';
 import { readFromCache, writeToCache } from '@/helpers/cache';
 
 function TodoList({ selectedDate }: TodoListProps) {
-    const [todos, setTodos] = useState(() => {
-        return readFromCache(selectedDate?.toLocaleDateString());
-    });
+    const [todos, setTodos] = useState(() => readFromCache(selectedDate?.toLocaleDateString()));
     const [newTodo, setNewTodo] = useState('');
 
     useEffect(() => {

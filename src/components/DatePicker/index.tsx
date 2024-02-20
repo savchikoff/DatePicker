@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { useCalendar } from '@/providers/CalendarProvider';
+import CalendarProvider, { useCalendar } from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { DatePickerProps } from './interfaces';
-import CalendarProvider from '@/providers/CalendarProvider';
+
 import GlobalStyle from '@/GlobalStyles/styled';
 import {
     DatePickerContainer,

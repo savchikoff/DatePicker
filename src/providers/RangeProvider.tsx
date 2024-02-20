@@ -28,9 +28,7 @@ export const RangeContext = createContext<IRangeContext>({
     setRangeOnClick: undefined
 });
 
-export const useRange = () => {
-    return useContext(RangeContext);
-};
+export const useRange = () => useContext(RangeContext);
 
 function RangeProvider({ children }: IRangeProviderProps) {
     const [startDate, setStartDate] = useState<Date>(undefined);

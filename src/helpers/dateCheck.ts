@@ -5,8 +5,7 @@ export const isWeekend = (day: number, currentDate: Date) => {
     return weekDay === 0 || weekDay === 6;
 };
 
-export const isHoliday = (day: number, month: number, year: number, holidays: IHolidays[]): boolean => {
-    return holidays.some(holiday => {
+export const isHoliday = (day: number, month: number, year: number, holidays: IHolidays[]): boolean => holidays.some(holiday => {
         const { date: holidayDate } = holiday;
         return (
             holidayDate.getFullYear() === year &&
@@ -14,4 +13,3 @@ export const isHoliday = (day: number, month: number, year: number, holidays: IH
             holidayDate.getDate() === day
         );
     });
-};
