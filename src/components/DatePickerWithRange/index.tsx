@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import Calendar from '../Calendar';
 import GlobalStyle from '@/GlobalStyles/styled';
-import CalendarProvider from '@/providers/CalendarProvider';
 import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 import { DatePickerWithRangeProps } from './interfaces';
 
@@ -60,25 +59,29 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
     );
 
     return (
-        <CalendarProvider>
-            <RangeContext.Provider value={dateValue}>
-                <DatePickerContainer>
-                    <GlobalStyle />
-                    <RangeInputsWrapper>
-                        <DateInput
-                            handleCalendarClick={handleCalendarVisibility}
-                            label="From" />
-                        <DateInput
-                            handleCalendarClick={handleCalendarVisibility}
-                            label="To" />
-                    </RangeInputsWrapper>
-                    <CalendarContainer show={calendarVisible}>
-                        <Calendar
-                            setCalendarVisible={setCalendarVisible} />
-                    </CalendarContainer>
-                </DatePickerContainer>
-            </RangeContext.Provider>
-        </CalendarProvider>
+        <RangeContext.Provider value={dateValue}>
+            <DatePickerContainer>
+                <GlobalStyle />
+                <RangeInputsWrapper>
+                    <DateInput
+                        handleCalendarClick={handleCalendarVisibility}
+                        label="From"
+                        selectedDate={startDate}
+                        setSelectedDate={setStartDate}
+                    />
+                    <DateInput
+                        handleCalendarClick={handleCalendarVisibility}
+                        label="To"
+                        selectedDate={endDate}
+                        setSelectedDate={setEndDate}
+                    />
+                </RangeInputsWrapper>
+                <CalendarContainer show={calendarVisible}>
+                    <Calendar
+                        setCalendarVisible={setCalendarVisible} />
+                </CalendarContainer>
+            </DatePickerContainer>
+        </RangeContext.Provider>
     );
 };
 

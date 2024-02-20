@@ -8,17 +8,16 @@ import { isValidDate } from '@/helpers/isValidDate';
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
 
-function DateInput({ handleCalendarClick, label = "Date" }: DateInputProps) {
+function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label = "Date" }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");
     const [isInputValid, setIsInputValid] = useState(true);
 
     const { minDate, maxDate } = useDate();
-    const { selectedDate: value, setSelectedDate } = useCalendar();
 
     useEffect(() => {
-        setEnteredDate(value?.toLocaleDateString());
+        setEnteredDate(selectedDate?.toLocaleDateString());
         setIsInputValid(true);
-    }, [value]);
+    }, [selectedDate]);
 
     const handleInputChange = (e) => {
         const regex = /^\d{2}\.\d{2}\.\d{4}$/;

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import CalendarProvider, { useCalendar } from '@/providers/CalendarProvider';
+import { CalendarContext, useCalendar } from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { DatePickerProps } from './interfaces';
 
@@ -18,12 +18,15 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
     const minMaxLimits = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
     const [selectedDate, setSelectedDate] = useState<Date>();
 
+    const dateValue = useMemo(() => ({ selectedDate, setSelectedDate }), [selectedDate, setSelectedDate]);
+
+
     const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible(prevState => !prevState);
     }, []);
 
     return (
-        <CalendarProvider>
+        <CalendarContext.Provider value={dateValue}>
             <DateContext.Provider value={minMaxLimits}>
                 <DatePickerContainer>
                     <GlobalStyle />
@@ -36,7 +39,7 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
                     </CalendarContainer>
                 </DatePickerContainer>
             </DateContext.Provider>
-        </CalendarProvider>
+        </CalendarContext.Provider>
     );
 };
 

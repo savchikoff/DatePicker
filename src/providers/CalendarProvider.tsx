@@ -5,31 +5,9 @@ interface ICalendarContext {
     setSelectedDate: (date: Date) => void;
 }
 
-interface CalendarProviderProps {
-    children: ReactNode;
-}
-
-
 export const CalendarContext = createContext<ICalendarContext>({
     selectedDate: undefined,
     setSelectedDate: () => undefined,
 });
 
 export const useCalendar = () => useContext(CalendarContext);
-
-function CalendarProvider({ children }: CalendarProviderProps) {
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-
-    const values: ICalendarContext = useMemo(() => ({
-        selectedDate,
-        setSelectedDate
-    }), [selectedDate]);
-
-    return (
-        <CalendarContext.Provider value={values}>
-            {children}
-        </CalendarContext.Provider>
-    )
-};
-
-export default CalendarProvider;
