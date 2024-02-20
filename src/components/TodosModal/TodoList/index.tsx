@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import withTheme from '@/decorators/withTheme';
 import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText, DeleteButton } from './styled';
 import { TodoListProps } from './types';
 import { readFromCache, writeToCache } from '@/helpers/cache';
@@ -62,4 +63,4 @@ function TodoList({ selectedDate }: TodoListProps) {
     );
 }
 
-export default TodoList;
+export default withTheme(TodoList);

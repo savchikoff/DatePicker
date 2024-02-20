@@ -14,6 +14,7 @@ export interface IRangeContext {
     setStartDate: (date: Date) => void;
     setEndDate: (date: Date) => void;
     setRangeOnClick: (date: Date) => void;
+    clearRange: () => void;
 }
 
 interface IRangeProviderProps {
@@ -25,38 +26,8 @@ export const RangeContext = createContext<IRangeContext>({
     endDate: undefined,
     setStartDate: undefined,
     setEndDate: undefined,
-    setRangeOnClick: undefined
+    setRangeOnClick: undefined,
+    clearRange: undefined
 });
 
 export const useRange = () => useContext(RangeContext);
-
-function RangeProvider({ children }: IRangeProviderProps) {
-    const [startDate, setStartDate] = useState<Date>(undefined);
-    const [endDate, setEndDate] = useState<Date>(undefined);
-
-    const setRangeOnClick = useCallback((clickedDate: Date) => {
-        if (!startDate) {
-            setStartDate(clickedDate);
-            return;
-        }
-        if (!endDate) {
-            setEndDate(clickedDate);
-            return;
-        }
-        if (clickedDate.getTime() < (startDate.getTime() + endDate.getTime()) / 2) {
-            setStartDate(clickedDate);
-            return;
-        }
-        setEndDate(clickedDate);
-    }, [startDate, endDate]);
-
-    const rangeValues: IRangeContext = useMemo(() => ({
-        startDate,
-        setStartDate,
-        endDate,
-        setEndDate,
-        setRangeOnClick
-    }), [startDate, endDate, setRangeOnClick])
-
-    return <RangeContext.Provider value={rangeValues}>{children}</RangeContext.Provider>
-}

@@ -1,9 +1,16 @@
 import styled from "styled-components";
 
+const s1 = ({ theme }) => theme.sizes.s1;
+const s8 = ({ theme }) => theme.sizes.s8;
+const s20 = ({ theme }) => theme.sizes.s20;
+const darkGrey = ({ theme }) => theme.colors.darkGrey;
+const coralRed = ({ theme }) => theme.colors.coralRed;
+const semiBold = ({ theme }) => theme.fontWeights.semiBold;
+
 export const DateContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: ${s8};
 `
 
 export const DateSelectorContainer = styled.div`
@@ -13,29 +20,29 @@ export const DateSelectorContainer = styled.div`
     width: 250px;
     padding: 14px;
     box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px solid #AAAAAA;
+    border-radius: ${s8};
+    border: ${s1} solid ${darkGrey};
 `
 
 export const DateSelectorLabel = styled.label`
     font-family: inherit;
-    font-size: 15;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: ${semiBold};
 `
 
 export const DateSelectorInputWrapper = styled.div`
     display: flex;
-    gap: 8px;
     align-items: center;
+    gap: ${s8};
 `
 
 export const DateSelectorInput = styled.input<{ isValid: boolean }>`
     width: 172px;
-    height: 20px;
+    height: ${s20};
     font-size: 15px;
     border: none;
     outline: none;
-    color: ${(props) => (props.isValid ? 'inherit' : '#FB3A3A')};
+    color: ${(props) => (props.isValid ? 'inherit' : coralRed)};
 `;
 
 

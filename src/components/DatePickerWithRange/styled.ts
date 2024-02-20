@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
+const s16 = ({ theme }) => theme.sizes.s16;
+
 export const RangeInputsWrapper = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${s16};
 `
 
 export const DatePickerContainer = styled.div`

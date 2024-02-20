@@ -1,5 +1,6 @@
 import React from 'react';
 import { SliderWrapper, DateContainer, Label } from './styled';
+import withTheme from '@/decorators/withTheme';
 import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
 
@@ -52,4 +53,4 @@ function Slider({ handleNextDateOpen, handlePreviousDateOpen, currentDate, isByY
     )
 }
 
-export default Slider;
+export default withTheme(Slider);

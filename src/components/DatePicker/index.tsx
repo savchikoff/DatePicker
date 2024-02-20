@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { CalendarContext, useCalendar } from '@/providers/CalendarProvider';
+import withTheme from '@/decorators/withTheme';
 import { DateContext } from '@/providers/DateProvider';
 import { DatePickerProps } from './interfaces';
 
@@ -43,4 +44,4 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
     );
 };
 
-export default DatePicker;
+export default withTheme(DatePicker);

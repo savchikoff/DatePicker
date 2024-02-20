@@ -1,7 +1,7 @@
 import React, { useEffect, useState, memo } from 'react';
 import GlobalStyle from '@/GlobalStyles/styled';
 import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
-import { useCalendar } from '@/providers/CalendarProvider';
+import withTheme from '@/decorators/withTheme';
 import { useDate } from '@/providers/DateProvider';
 import { DateInputProps } from './interfaces';
 import { isValidDate } from '@/helpers/isValidDate';
@@ -58,4 +58,4 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
     )
 }
 
-export default memo(DateInput); 
+export default memo(withTheme(DateInput)); 

@@ -1,6 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import Calendar from '../Calendar';
 import GlobalStyle from '@/GlobalStyles/styled';
+import Button from '../Button';
+import withTheme from '@/decorators/withTheme';
 import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 import { DatePickerWithRangeProps } from './interfaces';
 
@@ -13,7 +15,6 @@ import {
 import DateInput from '../DateInput';
 
 function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithRangeProps) {
-    const limitsValue = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
     const [calendarVisible, setCalendarVisible] = useState(false);
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
@@ -54,6 +55,7 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
             setStartDate,
             setEndDate,
             setRangeOnClick,
+            clearRange
         }),
         [startDate, endDate, setRangeOnClick],
     );
@@ -78,11 +80,12 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
                 </RangeInputsWrapper>
                 <CalendarContainer show={calendarVisible}>
                     <Calendar
-                        setCalendarVisible={setCalendarVisible} />
+                        setCalendarVisible={setCalendarVisible} isWithRange />
+                    <Button label="Clear interval" onClick={clearRange} />
                 </CalendarContainer>
             </DatePickerContainer>
         </RangeContext.Provider>
     );
 };
 
-export default DatePickerWithRange;
+export default withTheme(DatePickerWithRange);

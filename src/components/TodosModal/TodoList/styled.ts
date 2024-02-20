@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+const s8 = ({ theme }) => theme.sizes.s8;
+const s16 = ({ theme }) => theme.sizes.s16;
+const white = ({ theme }) => theme.colors.white;
+const red = ({ theme }) => theme.colors.red;
+const azure = ({ theme }) => theme.colors.azure;
+
 export const TodosContainer = styled.div``;
 
 export const TodoInput = styled.input``
@@ -8,19 +14,19 @@ export const TodoItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    gap: ${s8};
 `
 
 export const AddTodoButton = styled.button`
-    color: #FFFFFF;
-    padding: 8px 16px;
-    border-radius: 8px;
+    color: ${white};
+    padding: ${s8} ${s16};
+    border-radius: ${s8};
     border: none;
-    background-color: #2F80ED;
+    background-color: ${azure};
     transition: background-color 0.3s ease;
 
     &:hover{
-        background-color: #5A9EFA;
+        opacity: 0.9;
     }
 `;
 
@@ -30,13 +36,13 @@ export const TodosHeader = styled.h2`
 
 export const TodoAddField = styled.div`
     display: flex;
-    gap: 8px;
+    gap: ${s8};
 `
 
 export const ListOfTodos = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: ${s8}
     padding: 0;
     list-style: none;
 `
@@ -50,14 +56,14 @@ export const TodoText = styled.span<{ isCompleted: boolean }>`
 `
 
 export const DeleteButton = styled.button`
-    color: #FFFFFF;
-    padding: 8px 16px;
-    border-radius: 8px;
+    color: ${white};
+    padding: ${s8} ${s16};
+    border-radius: ${s8};
     border: none;
-    background-color: #FD1E1E;
+    background-color: ${red};
     transition: background-color 0.3s ease;
 
     &:hover{
-        background-color: #FF4444;
+        opacity: 0.9;
     }
 `;

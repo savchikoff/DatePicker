@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
+const s1 = ({ theme }) => theme.sizes.s1;
+const s4 = ({ theme }) => theme.sizes.s4;
+const s8 = ({ theme }) => theme.sizes.s8;
+const chineseWhite = ({ theme }) => theme.colors.chineseWhite;
+const azure = ({ theme }) => theme.colors.azure;
+const white = ({ theme }) => theme.colors.white;
+const darkGrey = ({ theme }) => theme.colors.darkGrey;
+const red = ({ theme }) => theme.colors.red;
+const darkWhite = ({ theme }) => theme.colors.darkWhite;
+const semiBold = ({ theme }) => theme.fontWeights.semiBold;
+
 export const CalendarWrapper = styled.div<{ isWithTodos: boolean }>`
     width: 250px;
-    box-sizing: border-box;
     min-height: 240px;
     padding: 10px;
-    border: 1px solid #E1E1E1;
-    border-radius: ${(props) => (props.isWithTodos ? '8px 8px 0 0' : '8px')};
+    border: ${s1} solid ${chineseWhite};
+    border-radius: ${({ isWithTodos }) => (isWithTodos ? `${s8} ${s8} 0 0` : s8)};
 `
 
 export const CalendarDays = styled.div`
@@ -14,17 +24,17 @@ export const CalendarDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
 `;
 
-export const CalendarDay = styled.div<{ isSelected: boolean, isNextMonth: boolean, isPreviousMonth: boolean, isWeekend: boolean, isHoliday: boolean }>`
+export const CalendarDay = styled.div<{ isSelected: boolean, isDisabled?: boolean, isWeekend: boolean, isHoliday: boolean }>`
   text-align: center;
   cursor: pointer;
   font-size: 13px;
-  font-weight: 600;
-  border-radius: 4px;
-  padding: 8px;
-  background-color: ${(props) => (props.isSelected ? '#007bff' : 'transparent')};
-  color: ${(props) => (props.isSelected ? '#fff' : props.isNextMonth || props.isPreviousMonth ? "#AAAAAA" : props.isWeekend || props.isHoliday ? "#FD1E1E" : "inherit")};
+  font-weight:  ${semiBold};
+  border-radius: ${s4};
+  padding: ${s8};
+  background-color: ${({ isSelected }) => (isSelected ? azure : 'transparent')};
+  color: ${({ isSelected, isDisabled, isWeekend, isHoliday }) => (isSelected ? white : isDisabled ? darkGrey : isWeekend || isHoliday ? red : "inherit")};
   transition: background-color 0.3s ease;
   &:hover{
-    background-color: #F1F1F1;
+    background-color: ${darkWhite};
   }
 `;
