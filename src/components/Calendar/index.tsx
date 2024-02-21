@@ -14,14 +14,13 @@ import { CalendarProps } from './interfaces';
 import { HOLIDAYS } from '@/constants/holidays';
 import { useRange } from '@/providers/RangeProvider';
 
-function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
+function Calendar({ isWithRange = true, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
     const { selectedDate, setSelectedDate } = useCalendar();
     const { startDate, setStartDate, endDate, setEndDate, setRangeOnClick, clearRange } = useRange();
     const { minDate, maxDate } = useDate();
 
     const currentDate = selectedDate || startDate || new Date();
-
-
+    const selectedRange = isWithRange ? { startDate, endDate } : null;
 
     const daysInMonth = new Date(
         currentDate.getFullYear(),
@@ -51,6 +50,16 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
 
     const daysFromNextMonth = Array.from({ length: 7 - ((daysArray.length + daysFromPrevMonth.length) % 7) }, (_, i) => i + 1);
 
+    const isInRange = (day: number): boolean => {
+        if (selectedRange) {
+            const dayTimestamp = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getTime();
+            const startTimestamp = selectedRange.startDate?.getTime() || 0;
+            const endTimestamp = selectedRange.endDate?.getTime() || 0;
+            return dayTimestamp >= startTimestamp && dayTimestamp <= endTimestamp;
+        }
+        return false;
+    };
+
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
         const clickedMonth = isPreviousMonth
             ? currentDate.getMonth() - 1
@@ -59,36 +68,65 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 : currentDate.getMonth();
 
         const newDate = new Date(currentDate.getFullYear(), clickedMonth, day);
+        console.log(newDate);
 
-        if (minDate && maxDate) {
-            if (newDate > minDate && newDate < maxDate) {
-                // setRangeOnClick ? () => setRangeOnClick(newDate) : () => setSelectedDate(newDate);
-                // console.log("1");
-                setSelectedDate(newDate)
+        if (isWithRange) {
+            if (minDate !== undefined && maxDate !== undefined) {
+                if (!startDate || (startDate && endDate)) {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                } else if (newDate >= startDate && newDate <= maxDate) {
+                    setEndDate(newDate);
+                } else if (newDate < startDate && newDate >= minDate) {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                }
+            } else {
+                if (!startDate || (startDate && endDate)) {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                } else if (newDate >= startDate) {
+                    setEndDate(newDate);
+                } else {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                }
             }
         } else {
-            // setRangeOnClick ? () => setRangeOnClick(newDate) : () => setSelectedDate(newDate);
-            // console.log("2");
-            setSelectedDate(newDate)
+            if ((minDate !== undefined && maxDate !== undefined) || (minDate === undefined && maxDate === undefined)) {
+                setSelectedDate(newDate);
+            }
         }
     };
+
+
 
     const handlePreviousDateOpen = (isByYear: boolean = false, isByWeek: boolean = false) => {
         const newDate = new Date(currentDate);
         if (isByYear) {
             newDate.setFullYear(currentDate.getFullYear() - 1);
         } else if (isByWeek) {
-            newDate.setFullYear(currentDate.getFullYear() - 1);
+            newDate.setDate(currentDate.getDate() - 7);
         } else {
             newDate.setMonth(currentDate.getMonth() - 1);
         }
 
         if (minDate) {
             if (newDate > minDate) {
-                setSelectedDate(newDate);
+                if (isWithRange) {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                } else {
+                    setSelectedDate(newDate);
+                }
             }
         } else {
-            setSelectedDate(newDate);
+            if (isWithRange) {
+                setStartDate(newDate);
+                setEndDate(null);
+            } else {
+                setSelectedDate(newDate);
+            }
         }
     };
 
@@ -97,17 +135,27 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
         if (isByYear) {
             newDate.setFullYear(currentDate.getFullYear() + 1);
         } else if (isByWeek) {
-            newDate.setFullYear(currentDate.getFullYear() + 1);
+            newDate.setDate(currentDate.getDate() + 7);
         } else {
             newDate.setMonth(currentDate.getMonth() + 1);
         }
 
         if (maxDate) {
             if (newDate < maxDate) {
-                setSelectedDate(newDate);
+                if (isWithRange) {
+                    setStartDate(newDate);
+                    setEndDate(null);
+                } else {
+                    setSelectedDate(newDate);
+                }
             }
         } else {
-            setSelectedDate(newDate);
+            if (isWithRange) {
+                setStartDate(newDate);
+                setEndDate(null);
+            } else {
+                setSelectedDate(newDate);
+            }
         }
     };
 
@@ -120,11 +168,11 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                     <CalendarDay
                         key={`prev-${day}`}
                         onClick={handleDayClick(day, true, false)}
-                        isSelected={selectedDate &&
+                        isSelected={isWithRange ? isInRange(day) : (selectedDate &&
                             selectedDate >= minDate &&
                             selectedDate.getFullYear() === currentDate.getFullYear() &&
                             selectedDate.getMonth() === currentDate.getMonth() - 1 &&
-                            day === selectedDate.getDate()}
+                            day === selectedDate.getDate())}
                         isDisabled
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, currentDate)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear(), HOLIDAYS)}
@@ -135,12 +183,12 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 {daysArray.map((day) => (
                     <CalendarDay
                         key={day}
-                        isSelected={selectedDate &&
+                        isSelected={isWithRange ? isInRange(day) : (selectedDate &&
                             selectedDate >= minDate &&
                             selectedDate <= maxDate &&
                             selectedDate.getFullYear() === currentDate.getFullYear() &&
                             selectedDate.getMonth() === currentDate.getMonth() &&
-                            day === selectedDate.getDate()}
+                            day === selectedDate.getDate())}
                         onClick={handleDayClick(day, false, false)}
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, currentDate)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear(), HOLIDAYS)}
@@ -152,11 +200,11 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                     <CalendarDay
                         key={`next-${day}`}
                         onClick={handleDayClick(day, false, true)}
-                        isSelected={selectedDate &&
+                        isSelected={isWithRange ? isInRange(day) : (selectedDate &&
                             selectedDate <= maxDate &&
                             selectedDate.getFullYear() === currentDate.getFullYear() &&
                             selectedDate.getMonth() === currentDate.getMonth() + 1 &&
-                            day === selectedDate.getDate()}
+                            day === selectedDate.getDate())}
                         isDisabled
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, currentDate)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, currentDate.getMonth(), currentDate.getFullYear(), HOLIDAYS)}

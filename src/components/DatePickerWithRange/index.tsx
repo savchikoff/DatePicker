@@ -16,8 +16,8 @@ import DateInput from '../DateInput';
 
 function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithRangeProps) {
     const [calendarVisible, setCalendarVisible] = useState(false);
-    const [startDate, setStartDate] = useState<Date>(new Date());
-    const [endDate, setEndDate] = useState<Date>(new Date());
+    const [startDate, setStartDate] = useState<Date>();
+    const [endDate, setEndDate] = useState<Date>();
 
     const handleCalendarVisibility = () => {
         setCalendarVisible((prevState) => !prevState);
@@ -59,6 +59,8 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
         }),
         [startDate, endDate, setRangeOnClick],
     );
+
+    console.log(startDate, endDate);
 
     return (
         <RangeContext.Provider value={dateValue}>

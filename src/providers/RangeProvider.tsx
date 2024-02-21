@@ -1,11 +1,6 @@
 import React, {
     createContext,
-    FC,
-    ReactNode,
-    useCallback,
-    useContext,
-    useMemo,
-    useState,
+    useContext
 } from "react";
 
 export interface IRangeContext {
@@ -15,10 +10,6 @@ export interface IRangeContext {
     setEndDate: (date: Date) => void;
     setRangeOnClick: (date: Date) => void;
     clearRange: () => void;
-}
-
-interface IRangeProviderProps {
-    children: ReactNode;
 }
 
 export const RangeContext = createContext<IRangeContext>({

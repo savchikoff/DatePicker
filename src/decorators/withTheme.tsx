@@ -10,7 +10,7 @@ const withTheme = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> 
                 <GlobalStyle />
                 <WrappedComponent {...props} />
             </ThemeProvider>
-        )
+        );
     }
 
     const displayName = WrappedComponent.displayName || WrappedComponent.name;
