@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import { ErrorContainer, ErrorMessage } from "./styled";
 import { ErrorBoundaryProps, ErrorBoundaryState } from "./interfaces";
+import { ErrorContainer, ErrorMessage } from "./styled";
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState>{
     constructor(props: ErrorBoundaryProps) {

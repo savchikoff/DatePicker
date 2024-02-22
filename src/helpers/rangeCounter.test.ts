@@ -1,4 +1,4 @@
-import { isStartDate, isEndDate, isInRange } from "./rangeCounter";
+import { isEndDate, isInRange,isStartDate } from "./rangeCounter";
 
 describe('isStartDate', () => {
     it('should return true for a matching start date', () => {

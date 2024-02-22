@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { HOLIDAYS } from '@/constants/holidays';
 import withTheme from '@/decorators/withTheme';
-import { isDatesEqual, isHoliday, isWeekend, isOutOfRange } from '@/helpers/dateCheck';
+import { isDatesEqual, isHoliday, isOutOfRange,isWeekend } from '@/helpers/dateCheck';
 import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
 import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
 import { useCalendar } from '@/providers/CalendarProvider';
@@ -52,13 +52,11 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                     setSelectedDate(newDate);
                 }
             }
-        } else {
-            if (isWithRange) {
+        } else if (isWithRange) {
                 setRangeOnClick(newDate)
             } else {
                 setSelectedDate(newDate);
             }
-        }
     };
 
 

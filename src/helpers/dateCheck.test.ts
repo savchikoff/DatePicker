@@ -1,5 +1,6 @@
-import { isWeekend, isHoliday, isDatesEqual } from "./dateCheck";
 import { HOLIDAYS } from "@/constants/holidays";
+
+import { isDatesEqual,isHoliday, isWeekend } from "./dateCheck";
 
 describe('isWeekend', () => {
     it('should return true for Sunday', () => {

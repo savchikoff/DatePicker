@@ -5,8 +5,8 @@ import { useCalendar } from '@/providers/CalendarProvider';
 
 import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
-import { DateContainer, Label, SliderWrapper } from './styled';
 import { MonthSliderProps } from './interfaces';
+import { DateContainer, Label, SliderWrapper } from './styled';
 
 function Slider({ isByYear }: MonthSliderProps) {
 

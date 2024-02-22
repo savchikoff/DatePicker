@@ -7,10 +7,10 @@ import CalendarProvider from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 
-import { ErrorBoundary } from '../ErrorBoundary';
 import Button from '../Button';
 import Calendar from '../Calendar';
 import DateInput from '../DateInput';
+import { ErrorBoundary } from '../ErrorBoundary';
 import { DatePickerWithRangeProps } from './interfaces';
 import {
     CalendarContainer,

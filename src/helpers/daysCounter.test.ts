@@ -1,4 +1,4 @@
-import { monthDays, firstDayOfTheMonth, prevMonthDays } from "./daysCounter";
+import { firstDayOfTheMonth, monthDays, prevMonthDays } from "./daysCounter";
 
 describe('monthDays', () => {
     it('should return the number of days in a month', () => {
