@@ -1,5 +1,6 @@
-import { isEndDate, isInRange, isStartDate } from "@/helpers/rangeCounter";
 import styled from "styled-components";
+
+import { isEndDate, isInRange, isStartDate } from "@/helpers/rangeCounter";
 
 const s1 = ({ theme }) => theme.sizes.s1;
 const s4 = ({ theme }) => theme.sizes.s4;

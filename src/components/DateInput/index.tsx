@@ -1,13 +1,15 @@
-import React, { useEffect, useState, memo } from 'react';
-import GlobalStyle from '@/GlobalStyles/styled';
-import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
+import React, { memo,useEffect, useState } from 'react';
+
 import withTheme from '@/decorators/withTheme';
+import GlobalStyle from '@/GlobalStyles/styled';
+import { isValidDate } from '@/helpers/isValidDate';
 import { useDate } from '@/providers/DateProvider';
 import { useRange } from '@/providers/RangeProvider';
-import { DateInputProps } from './interfaces';
-import { isValidDate } from '@/helpers/isValidDate';
+
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
+import { DateInputProps } from './interfaces';
+import { DateContainer, DateSelectorContainer, DateSelectorInput, DateSelectorInputWrapper,DateSelectorLabel } from './styled';
 
 function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label = "Date" }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");

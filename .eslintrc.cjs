@@ -30,11 +30,15 @@ module.exports = {
         "project": ["./tsconfig.json"]
     },
     "plugins": [
-        "react"
+        "react",
+        "simple-import-sort"
     ],
     "rules": {
         "react/jsx-props-no-spreading": "off",
         "import/prefer-default-export": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "react/require-default-props": "off",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "react/no-array-index-key": "off",

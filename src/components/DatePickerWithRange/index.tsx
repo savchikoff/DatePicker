@@ -1,20 +1,20 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import Calendar from '../Calendar';
-import CalendarProvider from '@/providers/CalendarProvider';
-import GlobalStyle from '@/GlobalStyles/styled';
-import Button from '../Button';
+
 import withTheme from '@/decorators/withTheme';
 import withWeekends from '@/decorators/withWeekends';
+import GlobalStyle from '@/GlobalStyles/styled';
+import CalendarProvider from '@/providers/CalendarProvider';
 import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
-import { DatePickerWithRangeProps } from './interfaces';
 
+import Button from '../Button';
+import Calendar from '../Calendar';
+import DateInput from '../DateInput';
+import { DatePickerWithRangeProps } from './interfaces';
 import {
-    DatePickerContainer,
     CalendarContainer,
+    DatePickerContainer,
     RangeInputsWrapper
 } from './styled';
-
-import DateInput from '../DateInput';
 
 function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithRangeProps) {
     const [calendarVisible, setCalendarVisible] = useState(false);

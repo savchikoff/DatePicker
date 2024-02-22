@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { SliderWrapper, DateContainer, Label } from './styled';
-import { useCalendar } from '@/providers/CalendarProvider';
+
 import withTheme from '@/decorators/withTheme';
+import { useCalendar } from '@/providers/CalendarProvider';
+
 import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
+import { DateContainer, Label, SliderWrapper } from './styled';
 
 interface MonthSliderProps {
     isByYear?: boolean;
@@ -13,10 +15,6 @@ function Slider({ isByYear }: MonthSliderProps) {
 
     const { setSelectedYear, setSelectedMonth, selectedYear, selectedMonth } = useCalendar();
     const currentMonthDate = new Date(selectedYear, selectedMonth + 1, 0);
-
-    useEffect(() => {
-        console.log('fire');
-    }, [selectedMonth, selectedYear]);
 
     const handlePreviousDateOpen = (isByYear?: boolean) => {
         if (isByYear) {

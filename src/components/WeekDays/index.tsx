@@ -1,8 +1,10 @@
 import React from 'react';
-import withTheme from '@/decorators/withTheme';
-import { WeekDay } from './styled';
-import { WeekDaysProps } from './interfaces';
+
 import { WEEK_DAYS } from '@/constants/weekDays';
+import withTheme from '@/decorators/withTheme';
+
+import { WeekDaysProps } from './interfaces';
+import { WeekDay } from './styled';
 
 function WeekDays({ isMondayFirst }: WeekDaysProps) {
     return (

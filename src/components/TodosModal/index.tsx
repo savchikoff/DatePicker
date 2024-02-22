@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
-import TodoList from './TodoList';
+
 import withTheme from '@/decorators/withTheme';
-import { ModalProps } from './types';
-import { Overlay, ModalContainer, ModalHeader, CloseButton, Error } from './styled';
-import { useSelectedDate } from '@/providers/SelectedDateProvider';
 import useClickOutside from '@/hooks/useClickOutside';
+import { useSelectedDate } from '@/providers/SelectedDateProvider';
+
+import { CloseButton, Error,ModalContainer, ModalHeader, Overlay } from './styled';
+import TodoList from './TodoList';
+import { ModalProps } from './types';
 
 function Modal({ isOpen, onClose }: ModalProps) {
   if (!isOpen) {

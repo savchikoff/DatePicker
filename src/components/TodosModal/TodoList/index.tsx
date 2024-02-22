@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
 import withTheme from '@/decorators/withTheme';
-import { TodosContainer, TodosHeader, TodoItem, TodoInput, ListOfTodos, TodoAddField, AddTodoButton, TodoCheckbox, TodoText, DeleteButton } from './styled';
-import { TodoListProps } from './types';
 import { readFromCache, writeToCache } from '@/helpers/cache';
+
+import { AddTodoButton, DeleteButton,ListOfTodos, TodoAddField, TodoCheckbox, TodoInput, TodoItem, TodosContainer, TodosHeader, TodoText } from './styled';
+import { TodoListProps } from './types';
 
 function TodoList({ selectedDate }: TodoListProps) {
     const [todos, setTodos] = useState(() => readFromCache(selectedDate?.toLocaleDateString()));

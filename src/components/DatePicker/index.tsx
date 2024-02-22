@@ -1,21 +1,21 @@
 import React, { useCallback, useMemo, useState } from 'react';
+
+import withHolidays from '@/decorators/withHolidays';
+import withTheme from '@/decorators/withTheme';
+import withTodos from '@/decorators/withTodos';
+import withWeekends from '@/decorators/withWeekends';
+import GlobalStyle from '@/GlobalStyles/styled';
+import CalendarProvider from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { SelectedDateContext } from '@/providers/SelectedDateProvider';
-import CalendarProvider from '@/providers/CalendarProvider';
-import withTheme from '@/decorators/withTheme';
-import withHolidays from '@/decorators/withHolidays';
-import withWeekends from '@/decorators/withWeekends';
-import withTodos from '@/decorators/withTodos';
+
 import Calendar from '../Calendar';
-import { DatePickerProps } from './interfaces';
-
-import GlobalStyle from '@/GlobalStyles/styled';
-import {
-    DatePickerContainer,
-    CalendarContainer,
-} from './styled';
-
 import DateInput from '../DateInput';
+import { DatePickerProps } from './interfaces';
+import {
+    CalendarContainer,
+    DatePickerContainer,
+} from './styled';
 
 
 

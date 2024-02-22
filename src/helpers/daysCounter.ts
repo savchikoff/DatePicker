@@ -1,21 +1,16 @@
-export const monthDays = (selectedYear: number, selectedMonth: number) => {
-    return new Date(
+export const monthDays = (selectedYear: number, selectedMonth: number) => new Date(
         selectedYear,
         selectedMonth + 1,
         0
     ).getDate();
-};
 
-export const firstDayOfTheMonth = (selectedYear: number, selectedMonth: number) => {
-    return new Date(
+export const firstDayOfTheMonth = (selectedYear: number, selectedMonth: number) => new Date(
         selectedYear,
         selectedMonth,
         1
-    ).getDay();
-}
+    ).getDay()
 
-export const prevMonthDays = (selectedYear: number, selectedMonth: number, firstDayOfMonth: number, isMondayFirst: boolean) => {
-    return Array.from({ length: firstDayOfMonth === 0 && isMondayFirst ? 6 : firstDayOfMonth - (isMondayFirst ? 1 : 0) }, (_, i) => {
+export const prevMonthDays = (selectedYear: number, selectedMonth: number, firstDayOfMonth: number, isMondayFirst: boolean) => Array.from({ length: firstDayOfMonth === 0 && isMondayFirst ? 6 : firstDayOfMonth - (isMondayFirst ? 1 : 0) }, (_, i) => {
         const prevMonthLastDay = new Date(
             selectedYear,
             selectedMonth,
@@ -26,4 +21,3 @@ export const prevMonthDays = (selectedYear: number, selectedMonth: number, first
 
         return day > prevMonthLastDay ? day - prevMonthLastDay : day;
     })
-}

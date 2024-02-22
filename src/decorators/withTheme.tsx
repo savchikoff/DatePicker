@@ -1,7 +1,8 @@
 import React, { ComponentType, FC } from "react";
 import { ThemeProvider } from "styled-components";
-import theme from "@/theme/theme";
+
 import GlobalStyle from "@/GlobalStyles/styled";
+import theme from "@/theme/theme";
 
 const withTheme = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> => {
     function ComponentWithTheme(props: P) {

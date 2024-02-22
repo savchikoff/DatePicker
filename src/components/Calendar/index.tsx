@@ -1,22 +1,22 @@
 import React, { memo } from 'react';
-import WeekDays from '../WeekDays';
-import Slider from '../Slider';
-import { monthDays, firstDayOfTheMonth, prevMonthDays } from '@/helpers/daysCounter';
-import { useSelectedDate } from '@/providers/SelectedDateProvider';
-import { useDate } from '@/providers/DateProvider';
-import { useCalendar } from '@/providers/CalendarProvider';
-import { isHoliday, isWeekend } from '@/helpers/dateCheck';
-import { isStartDate, isEndDate, isInRange } from '@/helpers/rangeCounter';
-import { isDatesEqual } from '@/helpers/dateCheck';
-import withTheme from '@/decorators/withTheme';
-import {
-    CalendarWrapper,
-    CalendarDays,
-    CalendarDay
-} from './styled';
-import { CalendarProps } from './interfaces';
+
 import { HOLIDAYS } from '@/constants/holidays';
+import withTheme from '@/decorators/withTheme';
+import { isDatesEqual,isHoliday, isWeekend  } from '@/helpers/dateCheck';
+import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
+import { isEndDate, isInRange,isStartDate } from '@/helpers/rangeCounter';
+import { useCalendar } from '@/providers/CalendarProvider';
+import { useDate } from '@/providers/DateProvider';
 import { useRange } from '@/providers/RangeProvider';
+import { useSelectedDate } from '@/providers/SelectedDateProvider';
+
+import Slider from '../Slider';
+import WeekDays from '../WeekDays';
+import { CalendarProps } from './interfaces';
+import {
+    CalendarDay,
+    CalendarDays,
+    CalendarWrapper} from './styled';
 
 function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
     const { selectedDate, setSelectedDate } = useSelectedDate();
@@ -35,35 +35,27 @@ function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysH
     const daysFromNextMonth = Array.from({ length: 7 - ((daysArray.length + daysFromPrevMonth.length) % 7) }, (_, i) => i + 1);
 
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
-        const clickedMonth = isPreviousMonth ? selectedMonth - 1 : isNextMonth ? selectedMonth + 1 : selectedMonth;
+        const clickedMonth = isPreviousMonth
+            ? selectedMonth - 1
+            : isNextMonth
+                ? selectedMonth + 1
+                : selectedMonth;
+
         const newDate = new Date(selectedYear, clickedMonth, day);
 
         if (isWithRange) {
             if (minDate !== undefined && maxDate !== undefined) {
                 if (newDate >= minDate && newDate <= maxDate) {
-                    if (startDate && newDate > startDate) {
-                        setRangeOnClick(newDate);
-                    } else if (!startDate) {
-                        setRangeOnClick(newDate);
-                    }
+                    setRangeOnClick(newDate);
                 }
             } else {
-                if (startDate && newDate > startDate) {
-                    setRangeOnClick(newDate);
-                } else if (!startDate) {
-                    setRangeOnClick(newDate);
-                }
+                setRangeOnClick(newDate);
             }
-        } else {
-            if ((minDate !== undefined && maxDate !== undefined) && newDate >= minDate && newDate <= maxDate) {
-                if (startDate && newDate > startDate) {
-                    setSelectedDate(newDate);
-                } else if (!startDate) {
-                    setSelectedDate(newDate);
-                }
+        } else if (newDate >= minDate && newDate <= maxDate) {
+                setSelectedDate(newDate);
             }
-        }
     };
+
 
     return (
         <CalendarWrapper isWithTodos={isWithTodos || isWithRange}>

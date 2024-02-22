@@ -26,11 +26,9 @@ const CalendarContext = createContext<ICalendarContext>({
     setSelectedYear: () => undefined
 });
 
-export const useCalendar = () => {
-    return useContext(CalendarContext);
-};
+export const useCalendar = () => useContext(CalendarContext);
 
-const CalendarProvider: FC<ICalendarProviderProps> = ({ children }) => {
+function CalendarProvider({ children }: ICalendarProviderProps) {
     const [selectedDate, setSelectedDate] = useState(undefined);
     const [selectedMonth, setSelectedMonth] = useState(now.getMonth());
     const [selectedYear, setSelectedYear] = useState(now.getFullYear());
