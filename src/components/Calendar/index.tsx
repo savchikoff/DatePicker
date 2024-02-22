@@ -49,7 +49,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 if (isWithRange) {
                     setRangeOnClick(newDate);
                 } else {
-                    setSelectedDate(newDate);
+                    setSelectedDate(newDate); /// hello
                 }
             }
         } else {
