@@ -7,7 +7,6 @@ import CalendarProvider from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 
-import { ErrorBoundary } from '../ErrorBoundary';
 import Button from '../Button';
 import Calendar from '../Calendar';
 import DateInput from '../DateInput';
@@ -18,7 +17,7 @@ import {
     RangeInputsWrapper
 } from './styled';
 
-function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithRangeProps) {
+function DatePickerWithRange({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0, 1) }: DatePickerWithRangeProps) {
     const [calendarVisible, setCalendarVisible] = useState(false);
     const [startDate, setStartDate] = useState<Date>();
     const [endDate, setEndDate] = useState<Date>();
@@ -69,35 +68,34 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
     const CalendarWithWeekends = withWeekends(Calendar);
 
     return (
-        <ErrorBoundary>
-            <CalendarProvider>
-                <RangeContext.Provider value={dateValue}>
-                    <DateContext.Provider value={minMaxLimits}>
-                        <DatePickerContainer>
-                            <GlobalStyle />
-                            <RangeInputsWrapper>
-                                <DateInput
-                                    handleCalendarClick={handleCalendarVisibility}
-                                    label="From"
-                                    selectedDate={startDate}
-                                    setSelectedDate={setStartDate}
-                                />
-                                <DateInput
-                                    handleCalendarClick={handleCalendarVisibility}
-                                    label="To"
-                                    selectedDate={endDate}
-                                    setSelectedDate={setEndDate}
-                                />
-                            </RangeInputsWrapper>
-                            <CalendarContainer show={calendarVisible}>
-                                <CalendarWithWeekends isWithRange />
-                                <Button label="Clear interval" onClick={clearRange} />
-                            </CalendarContainer>
-                        </DatePickerContainer>
-                    </DateContext.Provider>
-                </RangeContext.Provider>
-            </CalendarProvider>
-        </ErrorBoundary>
+        <CalendarProvider>
+            <RangeContext.Provider value={dateValue}>
+                <DateContext.Provider value={minMaxLimits}>
+                    <DatePickerContainer>
+                        <GlobalStyle />
+                        <RangeInputsWrapper>
+                            <DateInput
+                                handleCalendarClick={handleCalendarVisibility}
+                                label="From"
+                                selectedDate={startDate}
+                                setSelectedDate={setStartDate}
+                            />
+                            <DateInput
+                                handleCalendarClick={handleCalendarVisibility}
+                                label="To"
+                                selectedDate={endDate}
+                                setSelectedDate={setEndDate}
+                            />
+                        </RangeInputsWrapper>
+                        <CalendarContainer show={calendarVisible}>
+                            <CalendarWithWeekends
+                                setCalendarVisible={setCalendarVisible} isWithRange />
+                            <Button label="Clear interval" onClick={clearRange} />
+                        </CalendarContainer>
+                    </DatePickerContainer>
+                </DateContext.Provider>
+            </RangeContext.Provider>
+        </CalendarProvider>
     );
 };
 

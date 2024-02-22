@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { HOLIDAYS } from '@/constants/holidays';
 import withTheme from '@/decorators/withTheme';
-import { isDatesEqual, isHoliday, isWeekend } from '@/helpers/dateCheck';
+import { isDatesEqual,isHoliday, isWeekend  } from '@/helpers/dateCheck';
 import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
-import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
+import { isEndDate, isInRange,isStartDate } from '@/helpers/rangeCounter';
 import { useCalendar } from '@/providers/CalendarProvider';
 import { useDate } from '@/providers/DateProvider';
 import { useRange } from '@/providers/RangeProvider';
@@ -16,10 +16,9 @@ import { CalendarProps } from './interfaces';
 import {
     CalendarDay,
     CalendarDays,
-    CalendarWrapper
-} from './styled';
+    CalendarWrapper} from './styled';
 
-function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
+function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
     const { selectedDate, setSelectedDate } = useSelectedDate();
     const { selectedYear, selectedMonth } = useCalendar();
     const { startDate, endDate, setRangeOnClick } = useRange();
@@ -44,26 +43,22 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
 
         const newDate = new Date(selectedYear, clickedMonth, day);
 
-        if (minDate && maxDate) {
-            if (newDate >= minDate && newDate <= maxDate) {
-                if (isWithRange) {
+        if (isWithRange) {
+            if (minDate !== undefined && maxDate !== undefined) {
+                if (newDate >= minDate && newDate <= maxDate) {
                     setRangeOnClick(newDate);
-                } else {
-                    setSelectedDate(newDate);
                 }
-            }
-        } else {
-            if (isWithRange) {
-                setRangeOnClick(newDate)
             } else {
+                setRangeOnClick(newDate);
+            }
+        } else if (newDate >= minDate && newDate <= maxDate) {
                 setSelectedDate(newDate);
             }
-        }
     };
 
 
     return (
-        <CalendarWrapper $isWithTodos={isWithTodos || isWithRange}>
+        <CalendarWrapper isWithTodos={isWithTodos || isWithRange}>
             <Slider />
             <CalendarDays>
                 <WeekDays isMondayFirst={isMondayFirst} />
@@ -71,13 +66,13 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                     <CalendarDay
                         key={`prev-${day}`}
                         onClick={handleDayClick(day, true, false)}
-                        $isSelected={selectedDate && isDatesEqual(day, selectedMonth - 1, selectedYear, selectedDate)}
-                        $isDisabled
-                        $isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
-                        $isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
-                        $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth - 1)}
-                        $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth - 1)}
-                        $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth - 1)}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth - 1, selectedYear, selectedDate)}
+                        isDisabled
+                        isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth - 1)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth - 1)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth - 1)}
                     >
                         {day}
                     </CalendarDay>
@@ -85,13 +80,13 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 {daysArray.map((day) => (
                     <CalendarDay
                         key={day}
-                        $isSelected={selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate)}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate)}
                         onClick={handleDayClick(day, false, false)}
-                        $isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
-                        $isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
-                        $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth)}
-                        $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth)}
-                        $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth)}
+                        isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth)}
                     >
                         {day}
                     </CalendarDay>
@@ -100,13 +95,13 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                     <CalendarDay
                         key={`next-${day}`}
                         onClick={handleDayClick(day, false, true)}
-                        $isSelected={selectedDate && isDatesEqual(day, selectedMonth + 1, selectedYear, selectedDate)}
-                        $isDisabled
-                        $isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
-                        $isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
-                        $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth + 1)}
-                        $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth + 1)}
-                        $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth + 1)}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth + 1, selectedYear, selectedDate)}
+                        isDisabled
+                        isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
+                        isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth + 1)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth + 1)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth + 1)}
                     >
                         {day}
                     </CalendarDay>

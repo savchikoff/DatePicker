@@ -22,15 +22,17 @@
         }
     },
     "include": [
-        "src",
+        "src/**/*",
+        ".storybook/**/*",
         ".eslintrc.cjs",
         "./rollup.config.js",
         "./babel.config.js",
-        "./jest.config.js"
+        "build",
+        "src/**/*.stories.tsx"
     ],
     "exclude": [
         "node_modules",
         "build",
-        "./src/**/*.stories.tsx"
+        "src/**/*.test.tsx"
     ]
 }

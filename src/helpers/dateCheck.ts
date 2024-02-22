@@ -6,13 +6,13 @@ export const isWeekend = (day: number, selectedYear: number, selectedMonth: numb
 };
 
 export const isHoliday = (day: number, month: number, year: number, holidays: IHolidays[]): boolean => holidays.some(holiday => {
-    const { date: holidayDate } = holiday;
-    return (
-        holidayDate.getFullYear() === year &&
-        holidayDate.getMonth() === month &&
-        holidayDate.getDate() === day
-    );
-})
+        const { date: holidayDate } = holiday;
+        return (
+            holidayDate.getFullYear() === year &&
+            holidayDate.getMonth() === month &&
+            holidayDate.getDate() === day
+        );
+    })
 
 export const isDatesEqual = (day: number, selectedMonth: number, selectedYear: number, selectedDate: Date) => {
     if (selectedDate.getFullYear() !== selectedYear) return false;

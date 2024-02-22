@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import withTheme from '@/decorators/withTheme';
 import { useCalendar } from '@/providers/CalendarProvider';
@@ -6,7 +6,10 @@ import { useCalendar } from '@/providers/CalendarProvider';
 import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
 import { DateContainer, Label, SliderWrapper } from './styled';
-import { MonthSliderProps } from './interfaces';
+
+interface MonthSliderProps {
+    isByYear?: boolean;
+}
 
 function Slider({ isByYear }: MonthSliderProps) {
 

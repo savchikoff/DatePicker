@@ -2,7 +2,6 @@ import { ComponentType } from "react";
 
 import CalendarService from "../../decorators/CalendarService";
 import withTodos from "../../decorators/withTodos";
-import withWeekends from "../../decorators/withWeekends"
 import Calendar from "../Calendar";
 import DatePicker from ".";
 
@@ -18,7 +17,6 @@ export default {
 
 export const BasicDatePicker = {
     args: {
-        CalendarType: Calendar,
-        withRange: false
+        CalendarType: CalendarWithTodos
     }
 };

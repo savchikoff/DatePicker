@@ -1,20 +1,20 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import withTheme from '@/decorators/withTheme';
 import { readFromCache, writeToCache } from '@/helpers/cache';
 
-import { AddTodoButton, DeleteButton, ListOfTodos, TodoAddField, TodoCheckbox, TodoInput, TodoItem, TodosContainer, TodosHeader, TodoText } from './styled';
-import { TodoListProps, Todo } from './interfaces';
+import { AddTodoButton, DeleteButton,ListOfTodos, TodoAddField, TodoCheckbox, TodoInput, TodoItem, TodosContainer, TodosHeader, TodoText } from './styled';
+import { TodoListProps } from './types';
 
 function TodoList({ selectedDate }: TodoListProps) {
-    const [todos, setTodos] = useState<Todo[]>(() => readFromCache(selectedDate?.toLocaleDateString()) || []);
+    const [todos, setTodos] = useState(() => readFromCache(selectedDate?.toLocaleDateString()));
     const [newTodo, setNewTodo] = useState('');
 
     useEffect(() => {
         writeToCache(selectedDate?.toLocaleDateString(), todos);
     }, [todos]);
 
-    const handleNewTodoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value);
+    const handleNewTodoInputChange = (e) => setNewTodo(e.target.value);
 
     const addTodo = () => {
         if (newTodo.trim() !== '') {
@@ -23,13 +23,13 @@ function TodoList({ selectedDate }: TodoListProps) {
         }
     };
 
-    const deleteTodo = (index: number) => {
+    const deleteTodo = (index) => {
         const updatedTodos = [...todos];
         updatedTodos.splice(index, 1);
         setTodos(updatedTodos);
     };
 
-    const toggleCompletion = (index: number) => {
+    const toggleCompletion = (index) => {
         const updatedTodos = [...todos];
         updatedTodos[index].completed = !updatedTodos[index].completed;
         setTodos(updatedTodos);

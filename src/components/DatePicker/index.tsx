@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-
 import withHolidays from '@/decorators/withHolidays';
 import withTheme from '@/decorators/withTheme';
 import withTodos from '@/decorators/withTodos';
@@ -10,7 +9,6 @@ import CalendarProvider from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { SelectedDateContext } from '@/providers/SelectedDateProvider';
 
-import { ErrorBoundary } from '../ErrorBoundary';
 import Calendar from '../Calendar';
 import DateInput from '../DateInput';
 import { DatePickerProps } from './interfaces';
@@ -21,7 +19,7 @@ import {
 
 
 
-function DatePicker({ CalendarType, minDate, maxDate }: DatePickerProps) {
+function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = new Date(2026, 0, 1) }: DatePickerProps) {
     const [calendarVisible, setCalendarVisible] = useState(false);
     const minMaxLimits = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
     const [selectedDate, setSelectedDate] = useState<Date>();
@@ -39,24 +37,22 @@ function DatePicker({ CalendarType, minDate, maxDate }: DatePickerProps) {
     }, []);
 
     return (
-        <ErrorBoundary>
-            <CalendarProvider>
-                <SelectedDateContext.Provider value={dateValue}>
-                    <DateContext.Provider value={minMaxLimits}>
-                        <DatePickerContainer>
-                            <GlobalStyle />
-                            <DateInput
-                                handleCalendarClick={handleCalendarVisibility}
-                                selectedDate={selectedDate}
-                                setSelectedDate={setSelectedDate} />
-                            <CalendarContainer $show={calendarVisible}>
-                                <CalendarWithTodos />
-                            </CalendarContainer>
-                        </DatePickerContainer>
-                    </DateContext.Provider>
-                </SelectedDateContext.Provider>
-            </CalendarProvider>
-        </ErrorBoundary>
+        <CalendarProvider>
+            <SelectedDateContext.Provider value={dateValue}>
+                <DateContext.Provider value={minMaxLimits}>
+                    <DatePickerContainer>
+                        <GlobalStyle />
+                        <DateInput
+                            handleCalendarClick={handleCalendarVisibility}
+                            selectedDate={selectedDate}
+                            setSelectedDate={setSelectedDate} />
+                        <CalendarContainer show={calendarVisible}>
+                            <CalendarWithTodos />
+                        </CalendarContainer>
+                    </DatePickerContainer>
+                </DateContext.Provider>
+            </SelectedDateContext.Provider>
+        </CalendarProvider>
     );
 };
 
