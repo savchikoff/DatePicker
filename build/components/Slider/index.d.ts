@@ -1,6 +1,4 @@
 import React from 'react';
-interface MonthSliderProps {
-    isByYear?: boolean;
-}
+import { MonthSliderProps } from './interfaces';
 declare const _default: React.FC<MonthSliderProps>;
 export default _default;
