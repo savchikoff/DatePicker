@@ -4,8 +4,8 @@ import withTheme from '@/decorators/withTheme';
 import withWeekends from '@/decorators/withWeekends';
 import GlobalStyle from '@/GlobalStyles/styled';
 import CalendarProvider from '@/providers/CalendarProvider';
-import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 import { DateContext } from '@/providers/DateProvider';
+import { IRangeContext, RangeContext } from '@/providers/RangeProvider';
 
 import Button from '../Button';
 import Calendar from '../Calendar';

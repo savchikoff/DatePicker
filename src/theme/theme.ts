@@ -1,4 +1,4 @@
-import { colors, fontWeights, IColors, IFontWeights,ISizes, sizes } from "./styles";
+import { colors, fontWeights, IColors, IFontWeights, ISizes, sizes } from "./styles";
 
 interface ITheme {
     colors: IColors;

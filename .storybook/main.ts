@@ -1,5 +1,5 @@
-import path from 'path';
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import path from 'path';
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin" // eslint-disable-line import/no-extraneous-dependencies
 
 const config: StorybookConfig = {
