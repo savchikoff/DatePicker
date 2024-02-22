@@ -8,4 +8,9 @@ export default {
     }
 };
 
-export const BasicInput = {};
+export const BasicInput = {
+    args: {
+        minDate: new Date(2024, 1, 10),
+        maxDate: new Date(2024, 2, 30)
+    }
+};

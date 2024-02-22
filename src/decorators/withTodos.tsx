@@ -5,17 +5,16 @@ import Modal from "../components/TodosModal";
 
 
 const withTodos = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> => {
-    const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
-
-    const handleModalOpen = () => {
-        setIsTodoModalOpen(true);
-    }
-
-    const handleModalClose = () => {
-        setIsTodoModalOpen(false);
-    }
-
     function ComponentWithTodos(props: P) {
+        const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
+
+        const handleModalOpen = () => {
+            setIsTodoModalOpen(true);
+        }
+
+        const handleModalClose = () => {
+            setIsTodoModalOpen(false);
+        }
         return (
             <>
                 <WrappedComponent {...props} isWithTodos />

@@ -20,3 +20,11 @@ export const isDatesEqual = (day: number, selectedMonth: number, selectedYear: n
     if (selectedDate.getDate() !== day) return false;
     return true;
 };
+
+export const isOutOfRange = (day: number, selectedMonth: number, selectedYear: number, minDate: Date, maxDate: Date) => {
+    if (minDate && maxDate) {
+        const targetDate = new Date(selectedYear, selectedMonth, day);
+        return targetDate < minDate || targetDate > maxDate;
+    }
+    return false;
+}

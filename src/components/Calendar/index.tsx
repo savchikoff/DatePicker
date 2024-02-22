@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { HOLIDAYS } from '@/constants/holidays';
 import withTheme from '@/decorators/withTheme';
-import { isDatesEqual, isHoliday, isWeekend } from '@/helpers/dateCheck';
+import { isDatesEqual, isHoliday, isWeekend, isOutOfRange } from '@/helpers/dateCheck';
 import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
 import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
 import { useCalendar } from '@/providers/CalendarProvider';
@@ -49,7 +49,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 if (isWithRange) {
                     setRangeOnClick(newDate);
                 } else {
-                    setSelectedDate(newDate); /// hello
+                    setSelectedDate(newDate);
                 }
             }
         } else {
@@ -88,6 +88,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                         $isSelected={selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate)}
                         onClick={handleDayClick(day, false, false)}
                         $isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
+                        $isDisabled={isOutOfRange(day, selectedMonth, selectedYear, minDate, maxDate)}
                         $isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
                         $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth)}
                         $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth)}
