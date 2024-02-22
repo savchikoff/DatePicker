@@ -1,10 +1,6 @@
 import React, { ComponentType, FC } from "react";
 
-interface WithHolidaysProps {
-    isHolidaysHighlighted: boolean;
-}
-
-const withHolidays = <P extends object>(WrappedComponent: ComponentType<P & WithHolidaysProps>): FC<P> => {
+const withHolidays = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> => {
     function ComponentWithHolidays(props: P) {
         return <WrappedComponent {...props} isHolidaysHighlighted />
     }

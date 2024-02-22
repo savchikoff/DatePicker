@@ -1,10 +1,6 @@
 import React, { ComponentType, FC } from "react";
 
-interface WithMondayFirstProps {
-    isMondayFirst: boolean;
-}
-
-const withMondayFirst = <P extends object>(WrappedComponent: ComponentType<P & WithMondayFirstProps>): FC<P> => {
+const withMondayFirst = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> => {
     function ComponentWithMondayFirst(props: P) {
         return <WrappedComponent {...props} isMondayFirst />
     }

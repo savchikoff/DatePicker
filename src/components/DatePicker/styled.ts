@@ -5,10 +5,10 @@ export const DatePickerContainer = styled.div`
   display: inline-block;
 `;
 
-export const CalendarContainer = styled.div<{ show: boolean }>`
+export const CalendarContainer = styled.div<{ $show: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: ${(props) => (props.show ? 'block' : 'none')};
+  display: ${({ $show }) => ($show ? 'block' : 'none')};
 `;

@@ -23,7 +23,7 @@ module.exports = {
             }
         }
     ],
-    "ignorePatterns": ["!.storybook"],
+    "ignorePatterns": [".storybook", "src/**/*.stories.tsx", "src/**/*.test.tsx"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",

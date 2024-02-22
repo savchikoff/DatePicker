@@ -4,9 +4,9 @@ import withTheme from '@/decorators/withTheme';
 import useClickOutside from '@/hooks/useClickOutside';
 import { useSelectedDate } from '@/providers/SelectedDateProvider';
 
-import { CloseButton, Error,ModalContainer, ModalHeader, Overlay } from './styled';
+import { CloseButton, Error, ModalContainer, ModalHeader, Overlay } from './styled';
 import TodoList from './TodoList';
-import { ModalProps } from './types';
+import { ModalProps } from './interfaces';
 
 function Modal({ isOpen, onClose }: ModalProps) {
   if (!isOpen) {
