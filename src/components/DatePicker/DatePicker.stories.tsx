@@ -5,9 +5,9 @@ import withTodos from "../../decorators/withTodos";
 import Calendar from "../Calendar";
 import DatePicker from ".";
 
-// const calendarService = new CalendarService();
-// calendarService.addDecorator(withTodos);
-// const CalendarWithTodos = calendarService.getCalendar() as ComponentType;
+const calendarService = new CalendarService();
+calendarService.addDecorator(withTodos);
+const CalendarWithTodos = calendarService.getCalendar() as ComponentType;
 
 
 export default {
@@ -17,6 +17,6 @@ export default {
 
 export const BasicDatePicker = {
     args: {
-        CalendarType: Calendar
+        CalendarType: CalendarWithTodos
     }
 };

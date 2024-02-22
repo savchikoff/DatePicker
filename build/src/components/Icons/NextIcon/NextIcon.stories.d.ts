@@ -1,7 +1,7 @@
-/// <reference types="react" />
+import NextIcon from ".";
 declare const _default: {
     title: string;
-    component: (props: any) => import("react").JSX.Element;
+    component: typeof NextIcon;
     parameters: {
         layout: string;
     };

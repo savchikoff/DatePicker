@@ -92,5 +92,9 @@
   "dependencies": {
     "@mdx-js/esbuild": "^3.0.0",
     "serve": "^14.2.1"
+  },
+  "resolutions": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

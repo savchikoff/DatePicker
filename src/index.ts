@@ -1,3 +1,10 @@
-import CalendarIcon from "./components/Icons/CalendarIcon";
+import CalendarService from "./decorators/CalendarService";
 
-export { CalendarIcon };
+export const calendar = new CalendarService();
+
+export { default as CalendarService } from "./decorators/CalendarService";
+export { default as withHolidays } from "./decorators/withHolidays";
+export { default as withMondayFirst } from "./decorators/withMondayFirst";
+export { default as withWeekends } from "./decorators/withWeekends";
+export { default as DatePickerWithRange } from "./components/DatePickerWithRange";
+export { default as DatePicker } from "./components/DatePicker";

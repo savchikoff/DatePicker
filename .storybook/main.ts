@@ -1,3 +1,4 @@
+import path from 'path';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin" // eslint-disable-line import/no-extraneous-dependencies
 
@@ -28,6 +29,11 @@ const config: StorybookConfig = {
 					extensions: config.resolve.extensions,
 				}),
 			]
+			config.resolve.alias = {
+				...config.resolve.alias,
+				react: path.resolve(__dirname, '../node_modules/react'),
+				'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+			};
 		}
 		return config
 	},

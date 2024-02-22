@@ -1,7 +1,7 @@
-/// <reference types="react" />
+import PreviousIcon from ".";
 declare const _default: {
     title: string;
-    component: (props: any) => import("react").JSX.Element;
+    component: typeof PreviousIcon;
     parameters: {
         layout: string;
     };
