@@ -3,6 +3,9 @@ import { DateContext } from '@/providers/DateProvider';
 import { SelectedDateContext } from '@/providers/SelectedDateProvider';
 import CalendarProvider from '@/providers/CalendarProvider';
 import withTheme from '@/decorators/withTheme';
+import withHolidays from '@/decorators/withHolidays';
+import withWeekends from '@/decorators/withWeekends';
+import Calendar from '../Calendar';
 import { DatePickerProps } from './interfaces';
 
 import GlobalStyle from '@/GlobalStyles/styled';
@@ -22,6 +25,9 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
 
     const dateValue = useMemo(() => ({ selectedDate, setSelectedDate }), [selectedDate, setSelectedDate]);
 
+    const CalendarWithHolidays = withHolidays(Calendar);
+    const CalendarWithWeekends = withWeekends(CalendarWithHolidays);
+
 
     const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible(prevState => !prevState);
@@ -38,7 +44,7 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
                             selectedDate={selectedDate}
                             setSelectedDate={setSelectedDate} />
                         <CalendarContainer show={calendarVisible}>
-                            <CalendarType />
+                            <CalendarWithWeekends />
                         </CalendarContainer>
                     </DatePickerContainer>
                 </DateContext.Provider>

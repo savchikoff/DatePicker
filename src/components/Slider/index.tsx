@@ -1,5 +1,6 @@
 import React from 'react';
 import { SliderWrapper, DateContainer, Label } from './styled';
+import { useCalendar } from '@/providers/CalendarProvider';
 import withTheme from '@/decorators/withTheme';
 import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
@@ -7,27 +8,20 @@ import PreviousIcon from '../Icons/PreviousIcon';
 interface MonthSliderProps {
     handleNextDateOpen: (isByYear?: boolean, isByWeek?: boolean) => void;
     handlePreviousDateOpen: (isByYear?: boolean, isByWeek?: boolean) => void;
-    currentDate: Date;
     isByYear: boolean;
-    isByWeek: boolean;
 }
 
-function Slider({ handleNextDateOpen, handlePreviousDateOpen, currentDate, isByYear, isByWeek }: MonthSliderProps) {
+function Slider({ handleNextDateOpen, handlePreviousDateOpen, isByYear }: MonthSliderProps) {
+
+    const { selectedYear, selectedMonth } = useCalendar();
+    const currentMonthDate = new Date(selectedYear, selectedMonth + 1, 0);
 
     const handleNextMonthOpen = () => {
-        if (isByWeek) {
-            handleNextDateOpen(false, true);
-        } else {
-            handleNextDateOpen();
-        }
+        handleNextDateOpen();
     }
 
     const handlePreviousMonthOpen = () => {
-        if (isByWeek) {
-            handlePreviousDateOpen(false, true);
-        } else {
-            handlePreviousDateOpen();
-        }
+        handlePreviousDateOpen();
     }
 
     const handleNextYearOpen = () => {
@@ -44,7 +38,7 @@ function Slider({ handleNextDateOpen, handlePreviousDateOpen, currentDate, isByY
             <DateContainer>
                 {isByYear && <PreviousIcon onClick={handlePreviousYearOpen} />}
                 <Label>
-                    {currentDate.toLocaleString('en-US', { month: 'long' })} {currentDate.getFullYear()}
+                    {currentMonthDate.toLocaleString('en-US', { month: 'long' })} {currentMonthDate.getFullYear()}
                 </Label>
                 {isByYear && <NextIcon onClick={handleNextYearOpen} />}
             </DateContainer>

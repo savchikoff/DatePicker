@@ -3,6 +3,7 @@ import GlobalStyle from '@/GlobalStyles/styled';
 import { DateContainer, DateSelectorInput, DateSelectorContainer, DateSelectorLabel, DateSelectorInputWrapper } from './styled';
 import withTheme from '@/decorators/withTheme';
 import { useDate } from '@/providers/DateProvider';
+import { useRange } from '@/providers/RangeProvider';
 import { DateInputProps } from './interfaces';
 import { isValidDate } from '@/helpers/isValidDate';
 import CalendarIcon from '../Icons/CalendarIcon';
