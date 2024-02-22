@@ -6,7 +6,11 @@ const white = ({ theme }) => theme.colors.white;
 const red = ({ theme }) => theme.colors.red;
 const azure = ({ theme }) => theme.colors.azure;
 
-export const TodosContainer = styled.div``;
+export const TodosContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`;
 
 export const TodoInput = styled.input``
 
@@ -42,7 +46,7 @@ export const TodoAddField = styled.div`
 export const ListOfTodos = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: ${s8}
+    gap: ${s8};
     padding: 0;
     list-style: none;
 `

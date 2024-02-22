@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SliderWrapper, DateContainer, Label } from './styled';
 import { useCalendar } from '@/providers/CalendarProvider';
 import withTheme from '@/decorators/withTheme';
@@ -6,15 +6,35 @@ import NextIcon from '../Icons/NextIcon';
 import PreviousIcon from '../Icons/PreviousIcon';
 
 interface MonthSliderProps {
-    handleNextDateOpen: (isByYear?: boolean, isByWeek?: boolean) => void;
-    handlePreviousDateOpen: (isByYear?: boolean, isByWeek?: boolean) => void;
-    isByYear: boolean;
+    isByYear?: boolean;
 }
 
-function Slider({ handleNextDateOpen, handlePreviousDateOpen, isByYear }: MonthSliderProps) {
+function Slider({ isByYear }: MonthSliderProps) {
 
-    const { selectedYear, selectedMonth } = useCalendar();
+    const { setSelectedYear, setSelectedMonth, selectedYear, selectedMonth } = useCalendar();
     const currentMonthDate = new Date(selectedYear, selectedMonth + 1, 0);
+
+    useEffect(() => {
+        console.log('fire');
+    }, [selectedMonth, selectedYear]);
+
+    const handlePreviousDateOpen = (isByYear?: boolean) => {
+        if (isByYear) {
+            setSelectedYear(selectedYear - 1);
+        } else {
+            setSelectedYear(selectedMonth === 0 ? selectedYear - 1 : selectedYear);
+            setSelectedMonth(selectedMonth > 0 ? selectedMonth - 1 : 11);
+        }
+    };
+
+    const handleNextDateOpen = (isByYear?: boolean) => {
+        if (isByYear) {
+            setSelectedYear(selectedYear + 1);
+        } else {
+            setSelectedYear(selectedMonth === 11 ? selectedYear + 1 : selectedYear);
+            setSelectedMonth(selectedMonth < 11 ? selectedMonth + 1 : 0);
+        }
+    };
 
     const handleNextMonthOpen = () => {
         handleNextDateOpen();

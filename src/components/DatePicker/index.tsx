@@ -5,6 +5,7 @@ import CalendarProvider from '@/providers/CalendarProvider';
 import withTheme from '@/decorators/withTheme';
 import withHolidays from '@/decorators/withHolidays';
 import withWeekends from '@/decorators/withWeekends';
+import withTodos from '@/decorators/withTodos';
 import Calendar from '../Calendar';
 import { DatePickerProps } from './interfaces';
 
@@ -27,6 +28,8 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
 
     const CalendarWithHolidays = withHolidays(Calendar);
     const CalendarWithWeekends = withWeekends(CalendarWithHolidays);
+    const CalendarWithTodos = withTodos(CalendarWithWeekends);
+
 
 
     const handleCalendarVisibility = useCallback(() => {
@@ -44,7 +47,7 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
                             selectedDate={selectedDate}
                             setSelectedDate={setSelectedDate} />
                         <CalendarContainer show={calendarVisible}>
-                            <CalendarWithWeekends />
+                            <CalendarWithTodos />
                         </CalendarContainer>
                     </DatePickerContainer>
                 </DateContext.Provider>

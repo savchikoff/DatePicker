@@ -3,7 +3,7 @@ import TodoList from './TodoList';
 import withTheme from '@/decorators/withTheme';
 import { ModalProps } from './types';
 import { Overlay, ModalContainer, ModalHeader, CloseButton, Error } from './styled';
-import { useCalendar } from '@/providers/SelectedDateProvider';
+import { useSelectedDate } from '@/providers/SelectedDateProvider';
 import useClickOutside from '@/hooks/useClickOutside';
 
 function Modal({ isOpen, onClose }: ModalProps) {
@@ -14,7 +14,7 @@ function Modal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef();
   useClickOutside(modalRef, onClose);
 
-  const { selectedDate } = useCalendar();
+  const { selectedDate } = useSelectedDate();
 
   const Content = selectedDate ? <TodoList selectedDate={selectedDate} /> : <Error>No date selected</Error>;
 

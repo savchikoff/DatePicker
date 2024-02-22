@@ -20,6 +20,12 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
         setIsInputValid(true);
     }, [selectedDate]);
 
+    useEffect(() => {
+        if (!selectedDate) {
+            setEnteredDate("");
+        }
+    }, [selectedDate])
+
     const handleInputChange = (e) => {
         const regex = /^\d{2}\.\d{2}\.\d{4}$/;
         const newValue = e.target.value;

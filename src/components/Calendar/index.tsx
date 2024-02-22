@@ -6,6 +6,7 @@ import { useSelectedDate } from '@/providers/SelectedDateProvider';
 import { useDate } from '@/providers/DateProvider';
 import { useCalendar } from '@/providers/CalendarProvider';
 import { isHoliday, isWeekend } from '@/helpers/dateCheck';
+import { isStartDate, isEndDate, isInRange } from '@/helpers/rangeCounter';
 import { isDatesEqual } from '@/helpers/dateCheck';
 import withTheme from '@/decorators/withTheme';
 import {
@@ -19,11 +20,9 @@ import { useRange } from '@/providers/RangeProvider';
 
 function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
     const { selectedDate, setSelectedDate } = useSelectedDate();
-    const { selectedYear, setSelectedYear, selectedMonth, setSelectedMonth } = useCalendar();
+    const { selectedYear, selectedMonth } = useCalendar();
     const { startDate, endDate, setRangeOnClick } = useRange();
     const { minDate, maxDate } = useDate();
-
-    const selectedRange = isWithRange ? { startDate, endDate } : null;
 
     const daysInMonth = monthDays(selectedYear, selectedMonth);
 
@@ -35,73 +34,53 @@ function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysH
 
     const daysFromNextMonth = Array.from({ length: 7 - ((daysArray.length + daysFromPrevMonth.length) % 7) }, (_, i) => i + 1);
 
-    const isInRange = (day: number): boolean => {
-        if (selectedRange) {
-            const dayTimestamp = new Date(selectedYear, selectedMonth, day).getTime();
-            const startTimestamp = selectedRange.startDate?.getTime() || 0;
-            const endTimestamp = selectedRange.endDate?.getTime() || 0;
-            return dayTimestamp >= startTimestamp && dayTimestamp <= endTimestamp;
-        }
-        return false;
-    };
-
     const handleDayClick = (day: number, isPreviousMonth: boolean, isNextMonth: boolean) => () => {
-        const clickedMonth = isPreviousMonth
-            ? selectedMonth - 1
-            : isNextMonth
-                ? selectedMonth + 1
-                : selectedMonth;
-
+        const clickedMonth = isPreviousMonth ? selectedMonth - 1 : isNextMonth ? selectedMonth + 1 : selectedMonth;
         const newDate = new Date(selectedYear, clickedMonth, day);
 
         if (isWithRange) {
             if (minDate !== undefined && maxDate !== undefined) {
                 if (newDate >= minDate && newDate <= maxDate) {
-                    setRangeOnClick(newDate);
+                    if (startDate && newDate > startDate) {
+                        setRangeOnClick(newDate);
+                    } else if (!startDate) {
+                        setRangeOnClick(newDate);
+                    }
                 }
             } else {
-                setRangeOnClick(newDate);
+                if (startDate && newDate > startDate) {
+                    setRangeOnClick(newDate);
+                } else if (!startDate) {
+                    setRangeOnClick(newDate);
+                }
             }
         } else {
-            if (newDate >= minDate && newDate <= maxDate) {
-                setSelectedDate(newDate);
+            if ((minDate !== undefined && maxDate !== undefined) && newDate >= minDate && newDate <= maxDate) {
+                if (startDate && newDate > startDate) {
+                    setSelectedDate(newDate);
+                } else if (!startDate) {
+                    setSelectedDate(newDate);
+                }
             }
         }
     };
-
-
-    const handlePreviousDateOpen = (isByYear?: boolean) => {
-        if (isByYear) {
-            setSelectedYear(selectedYear - 1);
-        } else {
-            setSelectedYear(selectedMonth === 0 ? selectedYear - 1 : selectedYear);
-            setSelectedMonth(selectedMonth > 0 ? selectedMonth - 1 : 11);
-        }
-    };
-
-    const handleNextDateOpen = (isByYear?: boolean) => {
-        if (isByYear) {
-            setSelectedYear(selectedYear + 1);
-        } else {
-            setSelectedYear(selectedMonth === 11 ? selectedYear + 1 : selectedYear);
-            setSelectedMonth(selectedMonth < 11 ? selectedMonth + 1 : 0);
-        }
-    };
-
 
     return (
         <CalendarWrapper isWithTodos={isWithTodos || isWithRange}>
-            <Slider isByYear handlePreviousDateOpen={handlePreviousDateOpen} handleNextDateOpen={handleNextDateOpen} />
+            <Slider />
             <CalendarDays>
                 <WeekDays isMondayFirst={isMondayFirst} />
                 {daysFromPrevMonth.map((day) => (
                     <CalendarDay
                         key={`prev-${day}`}
                         onClick={handleDayClick(day, true, false)}
-                        isSelected={isWithRange ? isInRange(day) : (selectedDate && isDatesEqual(day, selectedMonth - 1, selectedYear, selectedDate))}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth - 1, selectedYear, selectedDate)}
                         isDisabled
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth - 1)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth - 1)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth - 1)}
                     >
                         {day}
                     </CalendarDay>
@@ -109,10 +88,13 @@ function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysH
                 {daysArray.map((day) => (
                     <CalendarDay
                         key={day}
-                        isSelected={isWithRange ? isInRange(day) : (selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate))}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate)}
                         onClick={handleDayClick(day, false, false)}
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth)}
                     >
                         {day}
                     </CalendarDay>
@@ -121,16 +103,19 @@ function Calendar({ isWithRange = false, isWithTodos, isMondayFirst, isWeekDaysH
                     <CalendarDay
                         key={`next-${day}`}
                         onClick={handleDayClick(day, false, true)}
-                        isSelected={isWithRange ? isInRange(day) : (selectedDate && isDatesEqual(day, selectedMonth + 1, selectedYear, selectedDate))}
+                        isSelected={selectedDate && isDatesEqual(day, selectedMonth + 1, selectedYear, selectedDate)}
                         isDisabled
                         isWeekend={isWeekDaysHighlighted && isWeekend(day, selectedYear, selectedMonth)}
                         isHoliday={isHolidaysHighlighted && isHoliday(day, selectedMonth, selectedYear, HOLIDAYS)}
+                        isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth + 1)}
+                        isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth + 1)}
+                        isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth + 1)}
                     >
                         {day}
                     </CalendarDay>
                 ))}
             </CalendarDays>
-        </CalendarWrapper>
+        </CalendarWrapper >
     );
 }
 
