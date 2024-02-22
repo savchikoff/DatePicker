@@ -3,7 +3,7 @@ import TodoList from './TodoList';
 import withTheme from '@/decorators/withTheme';
 import { ModalProps } from './types';
 import { Overlay, ModalContainer, ModalHeader, CloseButton, Error } from './styled';
-import { useCalendar } from '@/providers/CalendarProvider';
+import { useCalendar } from '@/providers/SelectedDateProvider';
 import useClickOutside from '@/hooks/useClickOutside';
 
 function Modal({ isOpen, onClose }: ModalProps) {

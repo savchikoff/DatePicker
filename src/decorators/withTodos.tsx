@@ -1,7 +1,7 @@
 import React, { ComponentType, FC, useState } from "react";
 import Button from "../components/Button";
 import Modal from "../components/TodosModal";
-import { useCalendar } from "../providers/CalendarProvider";
+import { useCalendar } from "../providers/SelectedDateProvider";
 
 interface WithTodosProps {
     isWithTodos: boolean;

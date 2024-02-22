@@ -16,7 +16,7 @@ export const CalendarWrapper = styled.div<{ isWithTodos: boolean }>`
     min-height: 240px;
     padding: 10px;
     border: ${s1} solid ${chineseWhite};
-    border-radius: ${({ isWithTodos }) => (isWithTodos ? `${s8} ${s8} 0 0` : s8)};
+    border-radius: ${({ isWithTodos, theme }) => (isWithTodos ? `${theme.sizes.s8} ${theme.sizes.s8} 0 0` : s8)};
 `
 
 export const CalendarDays = styled.div`

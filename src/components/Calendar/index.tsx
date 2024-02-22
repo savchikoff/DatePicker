@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import WeekDays from '../WeekDays';
 import Slider from '../Slider';
-import { useCalendar } from '@/providers/CalendarProvider';
+import { useSelectedDate } from '@/providers/SelectedDateProvider';
 import { useDate } from '@/providers/DateProvider';
+import { useCalendar } from '@/providers/CalendarProvider';
 import { isHoliday, isWeekend } from '@/helpers/dateCheck';
 import withTheme from '@/decorators/withTheme';
 import {
@@ -15,12 +16,14 @@ import { HOLIDAYS } from '@/constants/holidays';
 import { useRange } from '@/providers/RangeProvider';
 
 function Calendar({ isWithRange = true, isWithTodos, isMondayFirst, isWeekDaysHighlighted, isHolidaysHighlighted }: CalendarProps) {
-    const { selectedDate, setSelectedDate } = useCalendar();
-    const { startDate, setStartDate, endDate, setEndDate, setRangeOnClick, clearRange } = useRange();
+    const { selectedDate, setSelectedDate } = useSelectedDate();
+    const { today, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth } = useCalendar();
+    const { startDate, setStartDate, endDate, setEndDate, setRangeOnClick } = useRange();
     const { minDate, maxDate } = useDate();
 
-    const currentDate = selectedDate || startDate || new Date();
+    const currentDate = selectedDate || startDate || today;
     const selectedRange = isWithRange ? { startDate, endDate } : null;
+    const currentMonthDate = new Date(selectedYear, selectedMonth - 1, 1);
 
     const daysInMonth = new Date(
         currentDate.getFullYear(),
@@ -68,29 +71,12 @@ function Calendar({ isWithRange = true, isWithTodos, isMondayFirst, isWeekDaysHi
                 : currentDate.getMonth();
 
         const newDate = new Date(currentDate.getFullYear(), clickedMonth, day);
-        console.log(newDate);
 
         if (isWithRange) {
             if (minDate !== undefined && maxDate !== undefined) {
-                if (!startDate || (startDate && endDate)) {
-                    setStartDate(newDate);
-                    setEndDate(null);
-                } else if (newDate >= startDate && newDate <= maxDate) {
-                    setEndDate(newDate);
-                } else if (newDate < startDate && newDate >= minDate) {
-                    setStartDate(newDate);
-                    setEndDate(null);
-                }
+                setRangeOnClick(newDate);
             } else {
-                if (!startDate || (startDate && endDate)) {
-                    setStartDate(newDate);
-                    setEndDate(null);
-                } else if (newDate >= startDate) {
-                    setEndDate(newDate);
-                } else {
-                    setStartDate(newDate);
-                    setEndDate(null);
-                }
+                setRangeOnClick(newDate);
             }
         } else {
             if ((minDate !== undefined && maxDate !== undefined) || (minDate === undefined && maxDate === undefined)) {
@@ -98,8 +84,6 @@ function Calendar({ isWithRange = true, isWithTodos, isMondayFirst, isWeekDaysHi
             }
         }
     };
-
-
 
     const handlePreviousDateOpen = (isByYear: boolean = false, isByWeek: boolean = false) => {
         const newDate = new Date(currentDate);

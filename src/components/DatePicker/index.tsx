@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { CalendarContext, useCalendar } from '@/providers/CalendarProvider';
-import withTheme from '@/decorators/withTheme';
 import { DateContext } from '@/providers/DateProvider';
+import { SelectedDateContext } from '@/providers/SelectedDateProvider';
+import CalendarProvider from '@/providers/CalendarProvider';
+import withTheme from '@/decorators/withTheme';
 import { DatePickerProps } from './interfaces';
 
 import GlobalStyle from '@/GlobalStyles/styled';
@@ -27,20 +28,22 @@ function DatePicker({ CalendarType, minDate = new Date(2023, 1, 2), maxDate = ne
     }, []);
 
     return (
-        <CalendarContext.Provider value={dateValue}>
-            <DateContext.Provider value={minMaxLimits}>
-                <DatePickerContainer>
-                    <GlobalStyle />
-                    <DateInput
-                        handleCalendarClick={handleCalendarVisibility}
-                        selectedDate={selectedDate}
-                        setSelectedDate={setSelectedDate} />
-                    <CalendarContainer show={calendarVisible}>
-                        <CalendarType />
-                    </CalendarContainer>
-                </DatePickerContainer>
-            </DateContext.Provider>
-        </CalendarContext.Provider>
+        <CalendarProvider>
+            <SelectedDateContext.Provider value={dateValue}>
+                <DateContext.Provider value={minMaxLimits}>
+                    <DatePickerContainer>
+                        <GlobalStyle />
+                        <DateInput
+                            handleCalendarClick={handleCalendarVisibility}
+                            selectedDate={selectedDate}
+                            setSelectedDate={setSelectedDate} />
+                        <CalendarContainer show={calendarVisible}>
+                            <CalendarType />
+                        </CalendarContainer>
+                    </DatePickerContainer>
+                </DateContext.Provider>
+            </SelectedDateContext.Provider>
+        </CalendarProvider>
     );
 };
 
