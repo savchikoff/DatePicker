@@ -3,11 +3,8 @@ import React, { ComponentType, FC, useState } from "react";
 import Button from "../components/Button";
 import Modal from "../components/TodosModal";
 
-interface WithTodosProps {
-    isWithTodos: boolean;
-}
 
-const withTodos = <P extends object>(WrappedComponent: ComponentType<P & WithTodosProps>): FC<P> => {
+const withTodos = <P extends object>(WrappedComponent: ComponentType<P>): FC<P> => {
     const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
 
     const handleModalOpen = () => {

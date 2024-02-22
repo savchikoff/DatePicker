@@ -1,15 +1,14 @@
-import React, { memo,useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 import withTheme from '@/decorators/withTheme';
 import GlobalStyle from '@/GlobalStyles/styled';
 import { isValidDate } from '@/helpers/isValidDate';
 import { useDate } from '@/providers/DateProvider';
-import { useRange } from '@/providers/RangeProvider';
 
 import CalendarIcon from '../Icons/CalendarIcon';
 import ClearIcon from '../Icons/ClearIcon';
 import { DateInputProps } from './interfaces';
-import { DateContainer, DateSelectorContainer, DateSelectorInput, DateSelectorInputWrapper,DateSelectorLabel } from './styled';
+import { DateContainer, DateSelectorContainer, DateSelectorInput, DateSelectorInputWrapper, DateSelectorLabel } from './styled';
 
 function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label = "Date" }: DateInputProps) {
     const [enteredDate, setEnteredDate] = useState("");
@@ -18,8 +17,8 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
     const { minDate, maxDate } = useDate();
 
     useEffect(() => {
-        setEnteredDate(selectedDate?.toLocaleDateString());
         setIsInputValid(true);
+        setEnteredDate(selectedDate?.toLocaleDateString());
     }, [selectedDate]);
 
     useEffect(() => {
@@ -58,7 +57,7 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
                 <DateSelectorContainer>
                     <DateSelectorInputWrapper>
                         <CalendarIcon onClick={handleCalendarClick} />
-                        <DateSelectorInput placeholder='DD.MM.YYYY' value={enteredDate} onChange={handleInputChange} maxLength={10} isValid={isInputValid} />
+                        <DateSelectorInput placeholder='DD.MM.YYYY' value={enteredDate} onChange={handleInputChange} maxLength={10} $isValid={!!isInputValid} />
                     </DateSelectorInputWrapper>
                     {enteredDate && <ClearIcon onClick={handleInputReset} />}
                 </DateSelectorContainer >

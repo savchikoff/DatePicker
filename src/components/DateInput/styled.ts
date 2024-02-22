@@ -36,13 +36,13 @@ export const DateSelectorInputWrapper = styled.div`
     gap: ${s8};
 `
 
-export const DateSelectorInput = styled.input<{ isValid: boolean }>`
+export const DateSelectorInput = styled.input<{ $isValid: boolean }>`
     width: 172px;
     height: ${s20};
     font-size: 15px;
     border: none;
     outline: none;
-    color: ${(props) => (props.isValid ? 'inherit' : coralRed)};
+    color: ${({ $isValid }) => ($isValid ? 'inherit' : coralRed)};
 `;
 
 
