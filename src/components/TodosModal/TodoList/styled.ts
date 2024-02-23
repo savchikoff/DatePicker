@@ -53,9 +53,9 @@ export const ListOfTodos = styled.ul`
 
 export const TodoCheckbox = styled.input``
 
-export const TodoText = styled.span<{ isCompleted: boolean }>`
+export const TodoText = styled.span<{ $isCompleted: boolean }>`
     width: 100%;
-    text-decoration: ${(props) => (props.isCompleted ? 'line-through' : 'none')};
+    text-decoration: ${({ $isCompleted }) => ($isCompleted ? 'line-through' : 'none')};
     word-break: break-word;
 `
 

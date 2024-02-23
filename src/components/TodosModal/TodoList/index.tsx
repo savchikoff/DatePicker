@@ -54,7 +54,7 @@ function TodoList({ selectedDate }: TodoListProps) {
                             checked={todo.completed}
                             onChange={() => toggleCompletion(index)}
                         />
-                        <TodoText isCompleted={todo.completed}>
+                        <TodoText $isCompleted={todo.completed}>
                             {todo.text}
                         </TodoText>
                         <DeleteButton onClick={() => deleteTodo(index)} type="button">Delete</DeleteButton>
