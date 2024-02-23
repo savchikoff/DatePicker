@@ -4,7 +4,6 @@ import CalendarService from "../../decorators/CalendarService";
 import withTodos from "../../decorators/withTodos";
 import withWeekends from "../../decorators/withWeekends"
 import withHolidays from "../../decorators/withHolidays"
-import Calendar from "../Calendar";
 import DatePicker from ".";
 
 const calendarService = new CalendarService();

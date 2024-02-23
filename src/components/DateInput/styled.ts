@@ -10,13 +10,13 @@ const semiBold = ({ theme }) => theme.fontWeights.semiBold;
 export const DateContainer = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: ${s8};
 `
 
 export const DateSelectorContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 250px;
     padding: 14px;
     box-sizing: border-box;

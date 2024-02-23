@@ -25,9 +25,9 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
 
     const minMaxLimits = useMemo(() => ({ minDate, maxDate }), [minDate, maxDate]);
 
-    const handleCalendarVisibility = () => {
+    const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible((prevState) => !prevState);
-    }
+    }, []);
 
     const setRangeOnClick = useCallback((clickedDate: Date) => {
         if (!startDate) {
@@ -49,10 +49,10 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
         setEndDate(clickedDate);
     }, [startDate, endDate]);
 
-    const clearRange = () => {
+    const clearRange = useCallback(() => {
         setStartDate(null);
         setEndDate(null);
-    }
+    }, []);
 
     const dateValue: IRangeContext = useMemo(
         () => ({
@@ -65,8 +65,6 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
         }),
         [startDate, endDate, setRangeOnClick],
     );
-
-    const CalendarWithWeekends = withWeekends(Calendar);
 
     return (
         <ErrorBoundary>
@@ -90,7 +88,7 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
                                 />
                             </RangeInputsWrapper>
                             <CalendarContainer show={calendarVisible}>
-                                <CalendarWithWeekends isWithRange />
+                                <CalendarType isWithRange />
                                 <Button label="Clear interval" onClick={clearRange} />
                             </CalendarContainer>
                         </DatePickerContainer>

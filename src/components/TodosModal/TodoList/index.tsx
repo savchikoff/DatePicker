@@ -1,9 +1,9 @@
-import React, { ChangeEvent,useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import withTheme from '@/decorators/withTheme';
 import { readFromCache, writeToCache } from '@/helpers/cache';
 
-import { Todo,TodoListProps } from './interfaces';
+import { Todo, TodoListProps } from './interfaces';
 import { AddTodoButton, DeleteButton, ListOfTodos, TodoAddField, TodoCheckbox, TodoInput, TodoItem, TodosContainer, TodosHeader, TodoText } from './styled';
 
 function TodoList({ selectedDate }: TodoListProps) {

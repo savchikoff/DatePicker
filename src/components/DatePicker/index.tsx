@@ -1,15 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import withHolidays from '@/decorators/withHolidays';
 import withTheme from '@/decorators/withTheme';
-import withTodos from '@/decorators/withTodos';
-import withWeekends from '@/decorators/withWeekends';
 import GlobalStyle from '@/GlobalStyles/styled';
 import CalendarProvider from '@/providers/CalendarProvider';
 import { DateContext } from '@/providers/DateProvider';
 import { SelectedDateContext } from '@/providers/SelectedDateProvider';
 
-import Calendar from '../Calendar';
 import DateInput from '../DateInput';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { DatePickerProps } from './interfaces';
@@ -27,12 +23,6 @@ function DatePicker({ CalendarType, minDate, maxDate }: DatePickerProps) {
 
     const dateValue = useMemo(() => ({ selectedDate, setSelectedDate }), [selectedDate, setSelectedDate]);
 
-    const CalendarWithHolidays = withHolidays(Calendar);
-    const CalendarWithWeekends = withWeekends(CalendarWithHolidays);
-    const CalendarWithTodos = withTodos(CalendarWithWeekends);
-
-
-
     const handleCalendarVisibility = useCallback(() => {
         setCalendarVisible(prevState => !prevState);
     }, []);
@@ -49,7 +39,7 @@ function DatePicker({ CalendarType, minDate, maxDate }: DatePickerProps) {
                                 selectedDate={selectedDate}
                                 setSelectedDate={setSelectedDate} />
                             <CalendarContainer $show={calendarVisible}>
-                                <CalendarWithTodos />
+                                <CalendarType />
                             </CalendarContainer>
                         </DatePickerContainer>
                     </DateContext.Provider>

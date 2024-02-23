@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import withTheme from '@/decorators/withTheme';
 
@@ -12,4 +12,4 @@ function Button({ label, onClick }: ButtonProps) {
     )
 }
 
-export default withTheme(Button);
+export default memo(withTheme(Button));

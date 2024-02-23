@@ -37,6 +37,9 @@ export interface IColors {
     darkGrey: string;
     coralRed: string;
     darkWhite: string;
+    royalBlue: string;
+    jordyBlue: string;
+    solitude: string;
     [color: string]: string;
 }
 
@@ -47,7 +50,10 @@ export const colors: IColors = {
     azure: "#007BFF",
     darkGrey: "#AAAAAA",
     coralRed: "#FB3A3A",
-    darkWhite: "#F1F1F1"
+    darkWhite: "#F1F1F1",
+    royalBlue: "#2F80ED",
+    jordyBlue: "#82B3F4",
+    solitude: "#EBF3FE"
 };
 
 export interface IFontWeights {

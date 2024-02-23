@@ -1,6 +1,6 @@
 {
-  "name": "datepicker-library",
-  "version": "1.0.0",
+  "name": "datepicker-library-savchikoff",
+  "version": "1.0.2",
   "description": "Datepicker library with different variations of calendar",
   "main": "build/index.js",
   "scripts": {

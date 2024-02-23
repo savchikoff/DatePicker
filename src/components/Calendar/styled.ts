@@ -10,6 +10,9 @@ const white = ({ theme }) => theme.colors.white;
 const darkGrey = ({ theme }) => theme.colors.darkGrey;
 const red = ({ theme }) => theme.colors.red;
 const darkWhite = ({ theme }) => theme.colors.darkWhite;
+const royalBlue = ({ theme }) => theme.colors.royalBlue;
+const jordyBlue = ({ theme }) => theme.colors.jordyBlue;
+const solitude = ({ theme }) => theme.colors.solitude;
 const semiBold = ({ theme }) => theme.fontWeights.semiBold;
 
 export const CalendarWrapper = styled.div<{ $isWithTodos: boolean }>`
@@ -32,12 +35,12 @@ export const CalendarDay = styled.div<{ $isSelected: boolean, $isDisabled?: bool
   font-weight:  ${semiBold};
   border-radius:  ${({ $isStartDate, $isEndDate, theme, $isInRange }) => ($isStartDate ? `${theme.sizes.s4} 0 0 ${theme.sizes.s4}` : $isEndDate ? `0 ${theme.sizes.s4} ${theme.sizes.s4} 0` : $isInRange ? '0' : s4)};
   padding: ${s8};
-  background-color: ${({ $isSelected, $isStartDate, $isEndDate, $isInRange }) => ($isSelected || $isEndDate ? azure : $isStartDate ? "#82B3F4" : $isInRange ? "#EBF3FE" : 'transparent')};
+  background-color: ${({ $isSelected, $isStartDate, $isEndDate, $isInRange }) => ($isSelected || $isEndDate ? azure : $isStartDate ? jordyBlue : $isInRange ? solitude : 'transparent')};
   color: ${({ $isSelected, $isDisabled, $isWeekend, $isHoliday, $isStartDate, $isEndDate, $isInRange }) =>
   ($isSelected ||
     $isStartDate ||
     $isEndDate ? white : $isDisabled ? darkGrey : $isWeekend ||
-      $isHoliday ? red : $isInRange ? "#2F80ED" : "inherit")
+      $isHoliday ? red : $isInRange ? royalBlue : "inherit")
   };
   transition: background-color 0.3s ease;
   &:hover{

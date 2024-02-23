@@ -2,10 +2,7 @@ import Calendar from ".";
 
 export default {
     title: 'Calendar/Calendar',
-    component: Calendar,
-    parameters: {
-        layout: 'centered',
-    }
+    component: Calendar
 };
 
 export const BasicCalendar = {};
