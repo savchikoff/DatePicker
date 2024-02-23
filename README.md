@@ -28,7 +28,7 @@ npm install styled-components
 ### Пример использования
 
 ```js
-    import './App.css'
+import './App.css'
 
 import { calendar, DatePicker, withWeekends, withHolidays, DatePickerWithRange } from 'datepicker-library-savchikoff';
 
