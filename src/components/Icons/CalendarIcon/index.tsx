@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 function CalendarIcon(props) {
-  return <svg
+    return <svg
         xmlns="http://www.w3.org/2000/svg"
         width={16}
         height={16}
         fill="none"
         {...props}
+        data-testid="calendar-icon"
     >
         <g clipPath="url(#calendar_svg__a)">
             <path

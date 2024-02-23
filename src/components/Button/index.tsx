@@ -7,7 +7,7 @@ import { DefaultButton } from './styled';
 
 function Button({ label, onClick }: ButtonProps) {
     return (
-        <DefaultButton onClick={onClick}>{label}</DefaultButton>
+        <DefaultButton onClick={onClick} data-testid="button" >{label}</DefaultButton>
 
     )
 }

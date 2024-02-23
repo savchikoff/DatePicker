@@ -8,8 +8,8 @@ import { WeekDay } from './styled';
 
 function WeekDays({ isMondayFirst }: WeekDaysProps) {
     return (
-        WEEK_DAYS[isMondayFirst ? 'Monday' : 'Sunday'].map((day) => (
-            <WeekDay key={day}>{day}</WeekDay>
+        WEEK_DAYS[isMondayFirst ? 'Monday' : 'Sunday'].map((day, index) => (
+            <WeekDay key={day} data-testid={`week-day-${index}`}>{day}</WeekDay>
         ))
     )
 }

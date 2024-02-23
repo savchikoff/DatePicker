@@ -57,7 +57,7 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
                 <DateSelectorContainer>
                     <DateSelectorInputWrapper>
                         <CalendarIcon onClick={handleCalendarClick} />
-                        <DateSelectorInput placeholder='DD.MM.YYYY' value={enteredDate} onChange={handleInputChange} maxLength={10} $isValid={!!isInputValid} />
+                        <DateSelectorInput data-testid="date-input" placeholder='DD.MM.YYYY' value={enteredDate} onChange={handleInputChange} maxLength={10} $isValid={!!isInputValid} />
                     </DateSelectorInputWrapper>
                     {enteredDate && <ClearIcon onClick={handleInputReset} />}
                 </DateSelectorContainer >

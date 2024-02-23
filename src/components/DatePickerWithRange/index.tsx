@@ -71,7 +71,7 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
             <CalendarProvider>
                 <RangeContext.Provider value={dateValue}>
                     <DateContext.Provider value={minMaxLimits}>
-                        <DatePickerContainer>
+                        <DatePickerContainer data-testid="range-picker">
                             <GlobalStyle />
                             <RangeInputsWrapper>
                                 <DateInput
@@ -87,7 +87,7 @@ function DatePickerWithRange({ CalendarType, minDate, maxDate }: DatePickerWithR
                                     setSelectedDate={setEndDate}
                                 />
                             </RangeInputsWrapper>
-                            <CalendarContainer show={calendarVisible}>
+                            <CalendarContainer $show={calendarVisible}>
                                 <CalendarType isWithRange />
                                 <Button label="Clear interval" onClick={clearRange} />
                             </CalendarContainer>

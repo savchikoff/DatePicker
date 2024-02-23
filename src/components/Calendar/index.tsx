@@ -82,6 +82,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 ))}
                 {daysArray.map((day) => (
                     <CalendarDay
+                        data-testid={`calendar-day-${day}`}
                         key={day}
                         $isSelected={selectedDate && isDatesEqual(day, selectedMonth, selectedYear, selectedDate)}
                         onClick={handleDayClick(day, false, false)}

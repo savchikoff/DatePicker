@@ -49,7 +49,7 @@ function Slider({ isByYear }: MonthSliderProps) {
 
     return (
         <SliderWrapper>
-            <PreviousIcon onClick={handlePreviousMonthOpen} />
+            <PreviousIcon onClick={handlePreviousMonthOpen} data-testid='prev-month' />
             <DateContainer>
                 {isByYear && <PreviousIcon onClick={handlePreviousYearOpen} />}
                 <Label>

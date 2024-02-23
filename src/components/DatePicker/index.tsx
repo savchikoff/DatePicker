@@ -32,13 +32,13 @@ function DatePicker({ CalendarType, minDate, maxDate }: DatePickerProps) {
             <CalendarProvider>
                 <SelectedDateContext.Provider value={dateValue}>
                     <DateContext.Provider value={minMaxLimits}>
-                        <DatePickerContainer>
+                        <DatePickerContainer data-testid="date-picker">
                             <GlobalStyle />
                             <DateInput
                                 handleCalendarClick={handleCalendarVisibility}
                                 selectedDate={selectedDate}
                                 setSelectedDate={setSelectedDate} />
-                            <CalendarContainer $show={calendarVisible}>
+                            <CalendarContainer $show={calendarVisible} data-testid="calendar-container">
                                 <CalendarType />
                             </CalendarContainer>
                         </DatePickerContainer>

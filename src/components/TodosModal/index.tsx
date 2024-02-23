@@ -18,7 +18,7 @@ function Modal({ isOpen, onClose }: ModalProps) {
 
   const { selectedDate } = useSelectedDate();
 
-  const Content = selectedDate ? <TodoList selectedDate={selectedDate} /> : <Error>No date selected</Error>;
+  const Content = selectedDate ? <TodoList selectedDate={selectedDate} /> : <Error data-testid="todo-error">No date selected</Error>;
 
   return (
     <Overlay>
