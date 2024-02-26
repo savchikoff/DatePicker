@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { CalendarDayProps } from "./interfaces";
 
 const s1 = ({ theme }) => theme.sizes.s1;
@@ -42,6 +43,7 @@ export const CalendarDay = styled.div <CalendarDayProps> `
     $isEndDate ? white : $isDisabled ? darkGrey : $isWeekend ||
       $isHoliday ? red : $isInRange ? royalBlue : "inherit")
   };
+  border: ${({ $isDateWithTodos, theme }) => ($isDateWithTodos ? `1px solid ${theme.colors.royalBlue}` : 'none')};
   transition: background-color 0.3s ease;
   &:hover{
     background-color: ${darkWhite};

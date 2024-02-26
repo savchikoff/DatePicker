@@ -9,14 +9,14 @@ import { CloseButton, Error, ModalContainer, ModalHeader, Overlay } from './styl
 import TodoList from './TodoList';
 
 function Modal({ isOpen, onClose }: ModalProps) {
-  if (!isOpen) {
-    return null;
-  }
-
   const modalRef = useRef();
   useClickOutside(modalRef, onClose);
 
   const { selectedDate } = useSelectedDate();
+
+  if (!isOpen) {
+    return null;
+  }
 
   const Content = selectedDate ? <TodoList selectedDate={selectedDate} /> : <Error data-testid="todo-error">No date selected</Error>;
 

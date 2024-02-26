@@ -14,4 +14,5 @@ export interface CalendarDayProps {
     $isStartDate: boolean;
     $isEndDate: boolean;
     $isInRange: boolean;
+    $isDateWithTodos: boolean;
 }

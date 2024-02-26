@@ -5,6 +5,7 @@ import withTheme from '@/decorators/withTheme';
 import { isDatesEqual, isHoliday, isOutOfRange, isWeekend } from '@/helpers/dateCheck';
 import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
 import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
+import { isDayWithTodos } from '@/helpers/isDayWithTodo';
 import { useCalendar } from '@/providers/CalendarProvider';
 import { useDate } from '@/providers/DateProvider';
 import { useRange } from '@/providers/RangeProvider';
@@ -44,6 +45,8 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
 
         const newDate = new Date(selectedYear, clickedMonth, day);
 
+        console.log(isDayWithTodos(day, selectedYear, selectedMonth));
+
         if (minDate && maxDate) {
             if (newDate >= minDate && newDate <= maxDate) {
                 if (isWithRange) {
@@ -76,6 +79,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                         $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth - 1)}
                         $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth - 1)}
                         $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth - 1)}
+                        $isDateWithTodos={isWithTodos && isDayWithTodos(day, selectedYear, selectedMonth)}
                     >
                         {day}
                     </CalendarDay>
@@ -92,6 +96,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                         $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth)}
                         $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth)}
                         $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth)}
+                        $isDateWithTodos={isWithTodos && isDayWithTodos(day, selectedYear, selectedMonth)}
                     >
                         {day}
                     </CalendarDay>
@@ -107,6 +112,7 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                         $isStartDate={isStartDate(startDate, day, selectedYear, selectedMonth + 1)}
                         $isEndDate={isEndDate(endDate, day, selectedYear, selectedMonth + 1)}
                         $isInRange={isInRange(startDate, endDate, day, selectedYear, selectedMonth + 1)}
+                        $isDateWithTodos={isWithTodos && isDayWithTodos(day, selectedYear, selectedMonth)}
                     >
                         {day}
                     </CalendarDay>
