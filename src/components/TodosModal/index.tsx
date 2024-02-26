@@ -1,4 +1,4 @@
-import React, { useRef, MouseEvent } from 'react';
+import React, { MouseEvent,useRef } from 'react';
 
 import withTheme from '@/decorators/withTheme';
 import { useSelectedDate } from '@/providers/SelectedDateProvider';

@@ -4,5 +4,5 @@ export interface ErrorBoundaryProps {
 }
 export interface ErrorBoundaryState {
     hasError: boolean;
-    error: Error | undefined;
+    error?: Error;
 }
