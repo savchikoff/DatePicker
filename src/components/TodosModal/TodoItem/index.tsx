@@ -1,7 +1,9 @@
 import React from 'react';
-import { TodoListItem, TodoCheckbox, TodoText, DeleteButton } from './styled';
-import { TodoItemProps } from './interfaces';
+
 import withTheme from '@/decorators/withTheme';
+
+import { TodoItemProps } from './interfaces';
+import { DeleteButton,TodoCheckbox, TodoListItem, TodoText } from './styled';
 
 function TodoItem({ todo, deleteTodo, toggleCompletion }: TodoItemProps) {
 

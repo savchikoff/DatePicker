@@ -35,6 +35,19 @@ const config: StorybookConfig = {
 				'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
 			};
 		}
+		const fileLoaderRule = config.module?.rules?.find(
+			(rule) => rule !== '...' && rule && rule.test instanceof RegExp && rule.test.test('.svg'),
+		);
+		if (fileLoaderRule && fileLoaderRule !== '...') {
+			fileLoaderRule.exclude = /\.svg$/;
+		}
+		config.module?.rules?.push({
+			test: /\.svg$/,
+			enforce: 'pre',
+			use: {
+				loader: require.resolve('@svgr/webpack'),
+			},
+		});
 		return config
 	},
 };

@@ -4,8 +4,8 @@ import { HOLIDAYS } from '@/constants/holidays';
 import withTheme from '@/decorators/withTheme';
 import { isDatesEqual, isHoliday, isOutOfRange, isWeekend } from '@/helpers/dateCheck';
 import { firstDayOfTheMonth, monthDays, prevMonthDays } from '@/helpers/daysCounter';
-import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
 import { isDayWithTodos } from '@/helpers/isDayWithTodo';
+import { isEndDate, isInRange, isStartDate } from '@/helpers/rangeCounter';
 import { useCalendar } from '@/providers/CalendarProvider';
 import { useDate } from '@/providers/DateProvider';
 import { useRange } from '@/providers/RangeProvider';
@@ -44,8 +44,6 @@ function Calendar({ isWithRange, isWithTodos, isMondayFirst, isWeekDaysHighlight
                 : selectedMonth;
 
         const newDate = new Date(selectedYear, clickedMonth, day);
-
-        console.log(isDayWithTodos(day, selectedYear, selectedMonth));
 
         if (minDate && maxDate) {
             if (newDate >= minDate && newDate <= maxDate) {

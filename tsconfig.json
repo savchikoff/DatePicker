@@ -26,7 +26,9 @@
         ".eslintrc.cjs",
         "./rollup.config.js",
         "./babel.config.js",
-        "./jest.config.js"
+        "./jest.config.js",
+        "./svgTransform.js",
+        "@types"
     ],
     "exclude": [
         "node_modules",

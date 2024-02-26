@@ -3,6 +3,7 @@ module.exports = {
     transformIgnorePatterns: ['node_modules/(?!(sucrase)/)'],
     transform: {
         '^.+\\.(js|jsx|ts|tsx|mjs)$': 'ts-jest',
+        "^.+\\.svg$": "<rootDir>/svgTransform.js"
     },
     moduleDirectories: ['node_modules', '<rootDir>/'],
     testEnvironment: 'jest-environment-jsdom',

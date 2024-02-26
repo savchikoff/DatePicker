@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, MouseEvent } from 'react';
 
 import withTheme from '@/decorators/withTheme';
-import useClickOutside from '@/hooks/useClickOutside';
 import { useSelectedDate } from '@/providers/SelectedDateProvider';
 
 import { ModalProps } from './interfaces';
@@ -9,8 +8,13 @@ import { CloseButton, Error, ModalContainer, ModalHeader, Overlay } from './styl
 import TodoList from './TodoList';
 
 function Modal({ isOpen, onClose }: ModalProps) {
-  const modalRef = useRef();
-  useClickOutside(modalRef, onClose);
+  const modalRef = useRef<HTMLDivElement>();
+
+  const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
 
   const { selectedDate } = useSelectedDate();
 
@@ -21,7 +25,7 @@ function Modal({ isOpen, onClose }: ModalProps) {
   const Content = selectedDate ? <TodoList selectedDate={selectedDate} /> : <Error data-testid="todo-error">No date selected</Error>;
 
   return (
-    <Overlay>
+    <Overlay onClick={handleOverlayClick}>
       <ModalContainer ref={modalRef}>
         <ModalHeader>
           <CloseButton onClick={onClose}>❌</CloseButton>

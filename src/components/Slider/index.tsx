@@ -3,8 +3,8 @@ import React from 'react';
 import withTheme from '@/decorators/withTheme';
 import { useCalendar } from '@/providers/CalendarProvider';
 
-import NextIcon from '../Icons/NextIcon';
-import PreviousIcon from '../Icons/PreviousIcon';
+import NextIcon from '@/assets/next.svg';
+import PreviousIcon from '@/assets/previous.svg';
 import { MonthSliderProps } from './interfaces';
 import { DateContainer, Label, SliderWrapper } from './styled';
 

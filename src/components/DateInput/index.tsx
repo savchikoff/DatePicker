@@ -1,13 +1,12 @@
 import React, { memo, useEffect, useState } from 'react';
 
 import withTheme from '@/decorators/withTheme';
-import GlobalStyle from '@/GlobalStyles/styled';
 import { isValidDate } from '@/helpers/isValidDate';
 import { useDate } from '@/providers/DateProvider';
-import { regex } from './config';
 
-import CalendarIcon from '../Icons/CalendarIcon';
-import ClearIcon from '../Icons/ClearIcon';
+import CalendarIcon from '@/assets/calendar.svg';
+import ClearIcon from '@/assets/clear.svg';
+import { regex } from './config';
 import { DateInputProps } from './interfaces';
 import { DateContainer, DateSelectorContainer, DateSelectorInput, DateSelectorInputWrapper, DateSelectorLabel } from './styled';
 
@@ -58,12 +57,11 @@ function DateInput({ selectedDate, setSelectedDate, handleCalendarClick, label =
 
     return (
         <>
-            <GlobalStyle />
             <DateContainer>
                 <DateSelectorLabel>{label}</DateSelectorLabel>
                 <DateSelectorContainer>
                     <DateSelectorInputWrapper>
-                        <CalendarIcon onClick={handleCalendarClick} />
+                        <CalendarIcon data-testid="calendar-icon" onClick={handleCalendarClick} />
                         <DateSelectorInput
                             data-testid="date-input"
                             placeholder='DD.MM.YYYY'

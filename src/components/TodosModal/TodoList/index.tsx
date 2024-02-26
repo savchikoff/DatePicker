@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import TodoItem from '../TodoItem';
-
 import withTheme from '@/decorators/withTheme';
 import { readFromCache, writeToCache } from '@/helpers/cache';
 
+import TodoItem from '../TodoItem';
 import { Todo, TodoListProps } from './interfaces';
 import { AddTodoButton, ListOfTodos, TodoAddField, TodoInput, TodosContainer, TodosHeader } from './styled';
 
