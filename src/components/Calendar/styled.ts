@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { CalendarDayProps } from "./interfaces";
 
 const s1 = ({ theme }) => theme.sizes.s1;
 const s4 = ({ theme }) => theme.sizes.s4;
@@ -28,7 +28,7 @@ export const CalendarDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
 `;
 
-export const CalendarDay = styled.div<{ $isSelected: boolean, $isDisabled?: boolean, $isWeekend: boolean, $isHoliday: boolean, $isStartDate: boolean, $isEndDate: boolean, $isInRange: boolean }>`
+export const CalendarDay = styled.div <CalendarDayProps> `
   text-align: center;
   cursor: pointer;
   font-size: 13px;

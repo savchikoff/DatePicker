@@ -1,9 +1,9 @@
 import { ComponentType } from "react";
 
-import CalendarService from "../../decorators/CalendarService";
-import withTodos from "../../decorators/withTodos";
-import withWeekends from "../../decorators/withWeekends"
-import withHolidays from "../../decorators/withHolidays"
+import CalendarService from "@/decorators/CalendarService";
+import withTodos from "@/decorators/withTodos";
+import withWeekends from "@/decorators/withWeekends";
+import withHolidays from "@/decorators/withHolidays";
 import DatePicker from ".";
 
 const calendarService = new CalendarService();

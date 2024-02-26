@@ -5,3 +5,13 @@ export interface CalendarProps {
     isWithRange?: boolean;
     isHolidaysHighlighted?: boolean;
 }
+
+export interface CalendarDayProps {
+    $isSelected: boolean;
+    $isDisabled?: boolean;
+    $isWeekend: boolean;
+    $isHoliday: boolean;
+    $isStartDate: boolean;
+    $isEndDate: boolean;
+    $isInRange: boolean;
+}
